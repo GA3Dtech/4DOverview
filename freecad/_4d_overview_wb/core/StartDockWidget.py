@@ -19,7 +19,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         toplineQW = QtWidgets.QHBoxLayout()
         self.folderLabel = QtWidgets.QLabel("Project Folder:")
         self.folderPath = QtWidgets.QLineEdit()
-        self.browseBtn = QtWidgets.QPushButton("browse")
+        self.browseBtn = QtWidgets.QPushButton("...")
         self.browseBtn.clicked.connect(self.selectFolder)
         toplineQW .addWidget(self.folderLabel)
         toplineQW .addWidget(self.folderPath)
@@ -28,14 +28,14 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
 
         # --- Overview generator button ---
 
-        self.OverviewGeneratorButton = QtWidgets.QPushButton("Overview Generate")
+        self.OverviewGeneratorButton = QtWidgets.QPushButton("Overview - Generate")
         self.OverviewGeneratorButton.setMinimumHeight(40)
         layout.addWidget(self.OverviewGeneratorButton)
         self.OverviewGeneratorButton.clicked.connect(self.functionGenerate)
 
         # --- Overview view button ---
 
-        self.OverviewViewButton = QtWidgets.QPushButton("Overview View")
+        self.OverviewViewButton = QtWidgets.QPushButton("Overview - View")
         self.OverviewViewButton.setMinimumHeight(40)
         layout.addWidget(self.OverviewViewButton)
         self.OverviewViewButton.clicked.connect(self.functionView)

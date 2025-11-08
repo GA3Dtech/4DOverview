@@ -5,6 +5,7 @@ from freecad. _4d_overview_wb import my_numpy_function
 
 #core function of the wb loading
 from freecad. _4d_overview_wb.core import StartDockWidget
+from freecad. _4d_overview_wb.core import CentralWindowGeneric
 
 translate=App.Qt.translate
 QT_TRANSLATE_NOOP=App.Qt.QT_TRANSLATE_NOOP
@@ -53,6 +54,7 @@ class _4DOverviewWB(Gui.Workbench):
         '''
     
         StartDockWidget.start()
+        CentralWindowGeneric.makeView()
 
         App.Console.PrintMessage(translate(
             "Log",

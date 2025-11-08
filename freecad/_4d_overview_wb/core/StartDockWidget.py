@@ -6,6 +6,7 @@ from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtCore import QSize, Qt
 
 from freecad. _4d_overview_wb.core import CentralWindowGeneric
+from freecad. _4d_overview_wb.core import CentralWindowOverview
 
 class FourOverviewMainPanel(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -14,6 +15,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         layout = QtWidgets.QVBoxLayout(self)
 
         # --- Project folder selection ---
+        self.path = None
         toplineQW = QtWidgets.QHBoxLayout()
         self.folderLabel = QtWidgets.QLabel("Project Folder:")
         self.folderPath = QtWidgets.QLineEdit()
@@ -26,10 +28,17 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
 
         # --- Overview generator button ---
 
-        self.OverviewGeneratorButton = QtWidgets.QPushButton("Overview")
+        self.OverviewGeneratorButton = QtWidgets.QPushButton("Overview Generate")
         self.OverviewGeneratorButton.setMinimumHeight(40)
         layout.addWidget(self.OverviewGeneratorButton)
         self.OverviewGeneratorButton.clicked.connect(self.functionGenerate)
+
+        # --- Overview view button ---
+
+        self.OverviewViewButton = QtWidgets.QPushButton("Overview View")
+        self.OverviewViewButton.setMinimumHeight(40)
+        layout.addWidget(self.OverviewViewButton)
+        self.OverviewViewButton.clicked.connect(self.functionView)
 
 
 
@@ -47,10 +56,10 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
 
     # --- 
     def selectFolder(self):
-        path = QtWidgets.QFileDialog.getExistingDirectory(self, "Choose a folder")
-        if path:
-            self.folderPath.setText(path)
-            self.checkFolderStructure4D(path)
+        self.path = QtWidgets.QFileDialog.getExistingDirectory(self, "Choose a folder")
+        if self.path:
+            self.folderPath.setText(self.path)
+            self.checkFolderStructure4D(self.path)
 
 
     # ---
@@ -70,7 +79,15 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
     # ---
     def functionGenerate(self) :
         print("Generate 4DOverview of the project folder")
-        CentralWindowGeneric.makeView()
+        
+        CentralWindowOverview.fForAllFcstd(self.path)
+        CentralWindowOverview.makeView()
+
+    # ---
+    def functionView(self) :
+        print("View 4DOverview of the project folder")
+        
+        CentralWindowOverview.makeView()
         
 
 def start () :

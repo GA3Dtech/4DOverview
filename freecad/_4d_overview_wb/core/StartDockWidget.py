@@ -5,6 +5,8 @@ import os
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtCore import QSize, Qt
 
+from freecad. _4d_overview_wb.core import CentralWindowGeneric
+
 class FourOverviewMainPanel(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -68,6 +70,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
     # ---
     def functionGenerate(self) :
         print("Generate 4DOverview of the project folder")
+        CentralWindowGeneric.makeView()
         
 
 def start () :

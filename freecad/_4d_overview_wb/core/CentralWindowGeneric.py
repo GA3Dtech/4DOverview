@@ -10,7 +10,7 @@ class CentralView(QtWidgets.QWidget):
         button = QtWidgets.QPushButton("Click me")
         layout.addWidget(label)
         layout.addWidget(button)
-        button.clicked.connect(lambda: label.setText("Hello again :)"))
+        button.clicked.connect(lambda: label.setText("Hello :)"))
 
 class CentralViewProvider:
     def __init__(self):

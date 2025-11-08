@@ -1,7 +1,10 @@
 import os
 import FreeCADGui as Gui
 import FreeCAD as App
-from freecad. _4d_overview_wb import my_numpy_function
+from freecad. _4d_overview_wb import my_numpy_function  
+
+#core function of the wb loading
+from freecad. _4d_overview_wb.core import StartDockWidget
 
 translate=App.Qt.translate
 QT_TRANSLATE_NOOP=App.Qt.QT_TRANSLATE_NOOP
@@ -31,6 +34,8 @@ class _4DOverviewWB(Gui.Workbench):
         here is the place to import all the commands
         """
 
+        
+
         App.Console.PrintMessage(translate(
             "Log",
             "Switching to _4d_overview_wb") + "\n")
@@ -46,6 +51,9 @@ class _4DOverviewWB(Gui.Workbench):
         '''
         code which should be computed when a user switch to this workbench
         '''
+    
+        StartDockWidget.start()
+
         App.Console.PrintMessage(translate(
             "Log",
             "Workbench _4d_overview_wb activated.") + "\n")

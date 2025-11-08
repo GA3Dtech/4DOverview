@@ -1,0 +1,31 @@
+# References: 
+# https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
+# https://packaging.python.org/en/latest/guides/packaging-namespace-packages/#native-namespace-packages
+# https://packaging.python.org/en/latest/guides/single-sourcing-package-version/
+# https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "freecad._4d_overview_wb"
+dynamic = ["version"]
+description = "(4DOverview: A K.I.S.S. FreeCAD Workbench for easy file management, including overview, Time Travel, Assets, Bill of Process, Bill of Materials, and more.)"
+readme = "README.md"
+license = {file = "LICENSE"}
+maintainers = [
+    {name = "GA3Dtech - Alain D. G.", email = "ga3d.tech2021@gmail.com"},
+]
+requires-python = ">=3.8"
+dependencies = ["('numpy',)"]
+
+[project.urls]
+source = "https://github.com/GA3Dtech/4DOverview"
+
+[tool.setuptools]
+packages = ["freecad", "freecad._4d_overview_wb"]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {attr = "freecad._4d_overview_wb.version.__version__"}

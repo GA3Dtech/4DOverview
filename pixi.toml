@@ -1,0 +1,16 @@
+[project]
+authors = ["GA3Dtech - Alain D. G. <ga3d.tech2021@gmail.com>"]
+channels = ["freecad/label/dev", "conda-forge"]
+description = "(4DOverview: A K.I.S.S. FreeCAD Workbench for easy file management, including overview, Time Travel, Assets, Bill of Process, Bill of Materials, and more.)"
+name = "freecad._4d_overview_wb"
+platforms = ["osx-arm64", "linux-aarch64", "linux-64", "win-64", "osx-64"]
+version = "(0.1.0)"
+
+[pypi-dependencies]
+freecad__4d_overview_wb = { path = ".", editable = true }
+
+[tasks]
+test = "python tests/tests.py"
+
+[dependencies]
+freecad = ">=1.0.0,<2"

@@ -2,6 +2,9 @@ from PySide6 import QtWidgets, QtCore
 import FreeCADGui
 import os
 
+from PySide6.QtGui import QIcon, QPixmap
+from PySide6.QtCore import QSize, Qt
+
 class FourOverviewMainPanel(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -18,6 +21,13 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         toplineQW .addWidget(self.folderPath)
         toplineQW .addWidget(self.browseBtn)
         layout.addLayout(toplineQW)
+
+        # --- Overview generator button ---
+
+        self.OverviewGeneratorButton = QtWidgets.QPushButton("Overview")
+        self.OverviewGeneratorButton.setMinimumHeight(40)
+        layout.addWidget(self.OverviewGeneratorButton)
+        self.OverviewGeneratorButton.clicked.connect(self.functionGenerate)
 
 
 
@@ -53,6 +63,11 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
                 sub = os.path.join(overview, f".{name}")
                 if not os.path.exists(sub):
                     os.makedirs(sub)
+
+
+    # ---
+    def functionGenerate(self) :
+        print("Generate 4DOverview of the project folder")
         
 
 def start () :

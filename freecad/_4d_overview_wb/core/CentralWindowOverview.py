@@ -223,34 +223,58 @@ class ThumbnailWidget(QtWidgets.QFrame):
     """Widget to get a clickable Miniature Thumbnail"""
     clicked = QtCore.Signal(str)  # signal vers  le chemin de l'image..
 
-    def __init__(self, img_path):
+    def __init__(self, img_path, size=200):
         super().__init__()
         self.img_path = img_path
+        self.size = size
+
+        
+        self.setFixedSize(size, size)
         self.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.setLineWidth(1)
         self.setCursor(QtCore.Qt.PointingHandCursor)
+        self.setStyleSheet("""
+            QFrame {
+                border-radius: 6px;
+                border: 1px solid #888;
+                background-color: #f8f8f8;
+            }
+            QFrame:hover {
+                border: 2px solid #0078d7;
+                background-color: #eef6ff;
+            }
+            QLabel {
+                color: #333;
+                font-size: 11px;
+            }
+        """)
 
+        # --- layout vertical ---
         layout = QtWidgets.QVBoxLayout(self)
-        layout.setContentsMargins(4, 4, 4, 4)
+        layout.setContentsMargins(6, 6, 6, 6)
+        layout.setSpacing(4)
 
+        # --- image ---
         pix = QtGui.QPixmap(img_path)
         if not pix.isNull():
-            pix = pix.scaled(128, 128, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation)
+            pix = pix.scaled(size - 20, size - 40, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation)
 
         self.label_img = QtWidgets.QLabel()
         self.label_img.setPixmap(pix)
         self.label_img.setAlignment(QtCore.Qt.AlignCenter)
-        layout.addWidget(self.label_img)
+        layout.addWidget(self.label_img, stretch=1)
 
-        filename = os.path.basename(img_path)
+        # --- file name without extension ---
+        filename = os.path.splitext(os.path.basename(img_path))[0]
         self.label_name = QtWidgets.QLabel(filename)
         self.label_name.setAlignment(QtCore.Qt.AlignCenter)
-        layout.addWidget(self.label_name)
+        self.label_name.setWordWrap(True)
+        layout.addWidget(self.label_name, stretch=0)
 
     def mousePressEvent(self, event):
         if event.button() == QtCore.Qt.LeftButton:
             self.clicked.emit(self.img_path)
-            print(self.img_path)
+            #print(self.img_path)
     
 def makeView(projectfolderpath) :
 

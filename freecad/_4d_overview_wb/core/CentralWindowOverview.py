@@ -230,13 +230,13 @@ class ThumbnailWidget(QtWidgets.QFrame):
 
         
         self.setFixedSize(size, size)
-        self.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.setLineWidth(1)
+        self.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.setLineWidth(0)
         self.setCursor(QtCore.Qt.PointingHandCursor)
         self.setStyleSheet("""
             QFrame {
                 border-radius: 6px;
-                border: 1px solid #888;
+                border: 0px solid #888;
                 background-color: #f8f8f8;
             }
             QFrame:hover {

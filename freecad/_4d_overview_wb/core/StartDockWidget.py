@@ -1,5 +1,6 @@
 from PySide6 import QtWidgets, QtCore
 import FreeCADGui
+import FreeCAD
 import os
 
 from PySide6.QtGui import QIcon, QPixmap
@@ -7,6 +8,7 @@ from PySide6.QtCore import QSize, Qt
 
 from freecad. _4d_overview_wb.core import CentralWindowGeneric
 from freecad. _4d_overview_wb.core import CentralWindowOverview
+from freecad. _4d_overview_wb.core import CentralWindowTimeLine
 
 class FourOverviewMainPanel(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -25,6 +27,11 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         toplineQW .addWidget(self.folderPath)
         toplineQW .addWidget(self.browseBtn)
         layout.addLayout(toplineQW)
+
+        # --- Ligne horizontale   ---
+        line = QtWidgets.QFrame()
+        line.setFrameShape(QtWidgets.QFrame.HLine)       # Ligne horizontale
+        layout.addWidget(line)
 
          # --- Overview view button ---
 
@@ -47,8 +54,22 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         layout.addWidget(self.OverviewGeneratorButtonOT)
         self.OverviewGeneratorButtonOT.clicked.connect(self.functionGenerateOT)
 
-       
+        # --- Ligne horizontale   ---
+        line = QtWidgets.QFrame()
+        line.setFrameShape(QtWidgets.QFrame.HLine)       # Ligne horizontale
+        layout.addWidget(line)
 
+        # --- TimeLine view button ---
+
+        self.TimeLineViewButton = QtWidgets.QPushButton("Timeline - View")
+        self.TimeLineViewButton.setMinimumHeight(40)
+        layout.addWidget(self.TimeLineViewButton)
+        self.TimeLineViewButton.clicked.connect(self.functionTimeLine)
+
+        self.TimeLineIncButton = QtWidgets.QPushButton("++")
+        self.TimeLineIncButton.setMinimumHeight(40)
+        layout.addWidget(self.TimeLineIncButton)
+        self.TimeLineIncButton.clicked.connect(self.functionTimeInc)
 
 
 
@@ -86,7 +107,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
 
     # ---
     def functionGenerateO(self) :
-        print("Generate 4DOverview of the project folder")
+        print("Generate 4DOverview of the project folder - Overview Only")
 
         if self.path == None :
             self.selectFolder()
@@ -97,7 +118,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
 
     # ---
     def functionGenerateOT(self) :
-        print("Generate 4DOverview of the project folder")
+        print("Generate 4DOverview of the project folder and Versionning")
 
         if self.path == None :
             self.selectFolder()
@@ -113,6 +134,39 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
             self.selectFolder()
         
         CentralWindowOverview.makeView(self.path)
+
+    # ---
+    def functionTimeLine(self) :
+        print("View 4DOverview TimeLine of actual file")
+
+        #if self.path == None :
+        #    self.selectFolder()
+
+        doc = FreeCAD.ActiveDocument
+        if doc and doc.FileName:
+            print(doc.FileName)
+        else:
+            print("no active file")
+        base_dir = os.path.dirname(doc.FileName)
+        basename = os.path.basename(doc.FileName)               # ex: "myPart.FCStd"
+        name_no_ext = os.path.splitext(basename)[0]             # ex: "myPart"
+        target_path = os.path.join(base_dir,"4DOverview" ,f".{name_no_ext}")
+
+        CentralWindowTimeLine.makeView(target_path)
+    
+        # ---
+    def functionTimeInc(self) :
+        print("create a version (time increment) ")
+
+        #if self.path == None :
+        #    self.selectFolder()
+        doc = FreeCAD.ActiveDocument
+        if doc and doc.FileName:
+            print(doc.FileName)
+        else:
+            print("no active file")
+
+        CentralWindowTimeLine.save_incremented_version(doc)
         
 
 def start () :

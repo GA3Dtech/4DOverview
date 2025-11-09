@@ -79,6 +79,9 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
     # ---
     def functionGenerate(self) :
         print("Generate 4DOverview of the project folder")
+
+        if self.path == None :
+            self.selectFolder()
         
         CentralWindowOverview.fForAllFcstd(self.path)
         CentralWindowOverview.makeView(self.path)
@@ -86,6 +89,9 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
     # ---
     def functionView(self) :
         print("View 4DOverview of the project folder")
+
+        if self.path == None :
+            self.selectFolder()
         
         CentralWindowOverview.makeView(self.path)
         

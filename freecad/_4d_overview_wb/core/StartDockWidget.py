@@ -81,13 +81,13 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         print("Generate 4DOverview of the project folder")
         
         CentralWindowOverview.fForAllFcstd(self.path)
-        CentralWindowOverview.makeView()
+        CentralWindowOverview.makeView(self.path)
 
     # ---
     def functionView(self) :
         print("View 4DOverview of the project folder")
         
-        CentralWindowOverview.makeView()
+        CentralWindowOverview.makeView(self.path)
         
 
 def start () :

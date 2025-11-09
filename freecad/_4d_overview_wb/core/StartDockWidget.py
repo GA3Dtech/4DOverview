@@ -26,19 +26,28 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         toplineQW .addWidget(self.browseBtn)
         layout.addLayout(toplineQW)
 
-        # --- Overview generator button ---
-
-        self.OverviewGeneratorButton = QtWidgets.QPushButton("Overview - Generate")
-        self.OverviewGeneratorButton.setMinimumHeight(40)
-        layout.addWidget(self.OverviewGeneratorButton)
-        self.OverviewGeneratorButton.clicked.connect(self.functionGenerate)
-
-        # --- Overview view button ---
+         # --- Overview view button ---
 
         self.OverviewViewButton = QtWidgets.QPushButton("Overview - View")
         self.OverviewViewButton.setMinimumHeight(40)
         layout.addWidget(self.OverviewViewButton)
         self.OverviewViewButton.clicked.connect(self.functionView)
+
+        # --- Overview generator button ---
+
+        self.OverviewGeneratorButtonO = QtWidgets.QPushButton("Overview - Generate O only")
+        self.OverviewGeneratorButtonO.setMinimumHeight(40)
+        layout.addWidget(self.OverviewGeneratorButtonO)
+        self.OverviewGeneratorButtonO.clicked.connect(self.functionGenerateO)
+
+        # --- Overview generator button ---
+
+        self.OverviewGeneratorButtonOT = QtWidgets.QPushButton("Overview - Generate O + T")
+        self.OverviewGeneratorButtonOT.setMinimumHeight(40)
+        layout.addWidget(self.OverviewGeneratorButtonOT)
+        self.OverviewGeneratorButtonOT.clicked.connect(self.functionGenerateOT)
+
+       
 
 
 
@@ -75,9 +84,19 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
                 if not os.path.exists(sub):
                     os.makedirs(sub)
 
+    # ---
+    def functionGenerateO(self) :
+        print("Generate 4DOverview of the project folder")
+
+        if self.path == None :
+            self.selectFolder()
+        
+        CentralWindowOverview.fForAllFcstdO(self.path)
+        CentralWindowOverview.makeView(self.path)
+
 
     # ---
-    def functionGenerate(self) :
+    def functionGenerateOT(self) :
         print("Generate 4DOverview of the project folder")
 
         if self.path == None :

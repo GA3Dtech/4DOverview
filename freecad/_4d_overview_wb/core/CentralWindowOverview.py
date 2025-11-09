@@ -109,8 +109,71 @@ def fForAllFcstd(folder_path) :
             FreeCAD.closeDocument(doc.Name)
             print(f"{filename} done & closed \n")
 
+def fForAllFcstdO(folder_path) :
+
+    for filename in os.listdir(folder_path):
+        if filename.lower().endswith(".fcstd"):
+            file_path = os.path.join(folder_path, filename)
+            print(f"Opening {file_path}")
+
+            # open file
+            doc = FreeCAD.open(file_path)
+            
+            # code for each file
+            mycodeO(doc)
+            
+            # Sauvegarder le document 
+            # doc.save()
+            
+            # close file
+            FreeCAD.closeDocument(doc.Name)
+            print(f"{filename} done & closed \n")
+
 
 # --- function to execute for each file .fcstd ---
+def mycodeO (doc):
+    print(f"Document {doc.Name} \n")
+
+    if not doc or not doc.FileName:
+        FreeCAD.Console.PrintError("No document found\n")
+    else:
+        filepath = doc.FileName
+        dirname = os.path.dirname(filepath)
+        basename = os.path.splitext(os.path.basename(filepath))[0]
+
+        # folder 4DOverview in the Project folder : Project/4DOverview/
+        overview_dir = os.path.join(dirname, "4DOverview")
+        if not os.path.exists(overview_dir):
+            os.mkdir(overview_dir)
+
+        # Save the file
+        doc.save()
+
+        # path for "inwork" FreeCAD files
+        png_path_inwork = os.path.join(overview_dir, f"{basename}.png")
+
+            # Extraction of thumbnail from .FCStd
+        try:
+            with zipfile.ZipFile(filepath , 'r') as z:
+                thumb_candidates = [f for f in z.namelist() if f.lower().endswith("thumbnail.png")]
+                if thumb_candidates:
+                    with z.open(thumb_candidates[0]) as thumb:
+                        data = thumb.read()  # read once
+                    # write to both destinations !!
+
+                    with open(png_path_inwork, "wb") as out:
+                        out.write(data)
+                    FreeCAD.Console.PrintMessage("Miniature extracted.\n")
+                else:
+                    raise FileNotFoundError
+                
+        except Exception:
+            # fallback : capture de la vue actuelle
+            FreeCAD.Console.PrintMessage("No Miniature found , capture scene instead.\n")
+            view = FreeCADGui.ActiveDocument.ActiveView
+
+
+
 def mycode (doc):
     print(f"Document {doc.Name} \n")
 

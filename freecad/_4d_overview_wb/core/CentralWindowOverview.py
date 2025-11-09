@@ -6,12 +6,16 @@ import os
 import string, zipfile
 from pathlib import Path
 
+
 class CentralView(QtWidgets.QWidget):
     def __init__(self,projectfolderpath):
+        projectname = str(Path(projectfolderpath).name)
+
+
         super().__init__()
         self.projectfolderpath = projectfolderpath
         layout = QtWidgets.QVBoxLayout(self)
-        label = QtWidgets.QLabel("<h2>Project Overview</h2>")
+        label = QtWidgets.QLabel(f"<h2>Project: {projectname}</h2>")
        #button = QtWidgets.QPushButton("Click me")
         layout.addWidget(label)
         #layout.addWidget(button)

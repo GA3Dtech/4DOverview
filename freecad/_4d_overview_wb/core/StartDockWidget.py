@@ -10,6 +10,7 @@ from freecad. _4d_overview_wb.core import CentralWindowGeneric
 from freecad. _4d_overview_wb.core import CentralWindowOverview
 from freecad. _4d_overview_wb.core import CentralWindowTimeLine
 from freecad. _4d_overview_wb.core import CentralWindowProjectBrowser
+from freecad. _4d_overview_wb.core import AssetCreatorWidget
 
 class FourOverviewMainPanel(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -69,6 +70,15 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         line.setFrameShape(QtWidgets.QFrame.HLine)       # Ligne horizontale
         layout.addWidget(line)
 
+        # --- Asset creator widget button ---
+
+        self.AssetCreatorButton = QtWidgets.QPushButton("Asset Creator")
+        self.AssetCreatorButton.setMinimumHeight(40)
+        layout.addWidget(self.AssetCreatorButton)
+        self.AssetCreatorButton.clicked.connect(self.functionAssetCreator)
+
+        layout.addWidget(line)
+
         # --- TimeLine view button ---
 
         self.TimeLineViewButton = QtWidgets.QPushButton("Timeline - View")
@@ -80,6 +90,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         self.TimeLineIncButton.setMinimumHeight(40)
         layout.addWidget(self.TimeLineIncButton)
         self.TimeLineIncButton.clicked.connect(self.functionTimeInc)
+
 
 
 
@@ -150,6 +161,12 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         print("Project Browser start in central view")
         
         CentralWindowProjectBrowser.show_project_browser()
+
+         # ---
+    def functionAssetCreator(self) :
+        print("starting the Asset Creator Widget")
+        
+        AssetCreatorWidget.launch_asset_creator()
 
     # ---
     def functionTimeLine(self) :

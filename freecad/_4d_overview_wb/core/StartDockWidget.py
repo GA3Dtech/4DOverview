@@ -9,12 +9,25 @@ from PySide6.QtCore import QSize, Qt
 from freecad. _4d_overview_wb.core import CentralWindowGeneric
 from freecad. _4d_overview_wb.core import CentralWindowOverview
 from freecad. _4d_overview_wb.core import CentralWindowTimeLine
+from freecad. _4d_overview_wb.core import CentralWindowProjectBrowser
 
 class FourOverviewMainPanel(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("4D Overview - Main")
         layout = QtWidgets.QVBoxLayout(self)
+
+          # --- Project Browser view button ---
+
+        self.ProjectBrowserButton = QtWidgets.QPushButton("Projects Browser")
+        self.ProjectBrowserButton.setMinimumHeight(40)
+        layout.addWidget(self.ProjectBrowserButton)
+        self.ProjectBrowserButton.clicked.connect(self.functionProjectBrowser)
+
+        # --- Ligne horizontale   ---
+        line = QtWidgets.QFrame()
+        line.setFrameShape(QtWidgets.QFrame.HLine)       # Ligne horizontale
+        layout.addWidget(line)
 
         # --- Project folder selection ---
         self.path = None
@@ -28,10 +41,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         toplineQW .addWidget(self.browseBtn)
         layout.addLayout(toplineQW)
 
-        # --- Ligne horizontale   ---
-        line = QtWidgets.QFrame()
-        line.setFrameShape(QtWidgets.QFrame.HLine)       # Ligne horizontale
-        layout.addWidget(line)
+        
 
          # --- Overview view button ---
 
@@ -134,6 +144,12 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
             self.selectFolder()
         
         CentralWindowOverview.makeView(self.path)
+
+        # ---
+    def functionProjectBrowser(self) :
+        print("Project Browser start in central view")
+        
+        CentralWindowProjectBrowser.show_project_browser()
 
     # ---
     def functionTimeLine(self) :

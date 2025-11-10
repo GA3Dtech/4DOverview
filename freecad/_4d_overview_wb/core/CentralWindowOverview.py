@@ -147,7 +147,8 @@ def mycodeO (doc):
             os.mkdir(overview_dir)
 
         # Save the file
-        doc.save()
+        #doc.save() # not necessary if you want to update the thumbnail with actual settings you must do it
+        # faster and lighter without especially on cloud parallelized storage
 
         # path for "inwork" FreeCAD files
         png_path_inwork = os.path.join(overview_dir, f"{basename}.png")

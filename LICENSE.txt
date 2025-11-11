@@ -1,0 +1,37 @@
+GA3D 4DOverview
+========================
+Copyright (c) 2025 GA3D - www.ga3d.tech
+Contact: ga3d.tech2021@gmail.com
+
+License for the GA3D 4DOverview Core
+------------------------------------
+The GA3D 4DOverview core is licensed under the terms of the
+GNU Lesser General Public License (LGPL), version 2.1 or later,
+as published by the Free Software Foundation.
+
+You may redistribute and/or modify this software under the terms
+of the LGPL as long as you respect the license terms.
+
+A copy of the full license text is included in this repository under:
+`licenses/LGPL-2.1.txt`
+
+Proprietary Extensions
+----------------------
+The folder `proext/` is reserved for proprietary or company-specific
+modules that build on top of the LGPL core.  
+These extensions may remain closed-source and are **not** subject to
+the LGPL license, as long as they dynamically link to the core and do
+not incorporate modified LGPL code.
+
+For commercial licensing or custom development inquiries:
+ga3d.tech2021@gmail.com
+
+Disclaimer
+----------
+This software is provided “as is”, without warranty of any kind,
+express or implied, including but not limited to the warranties of
+merchantability, fitness for a particular purpose and noninfringement.
+
+--------------------------------------
+(c) 2025 GA3D - All rights reserved.
+

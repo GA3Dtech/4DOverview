@@ -1,3 +1,24 @@
+# ***************************************************************************
+#   Copyright (c) 2025 GA3D - www.ga3d.tech
+#
+#   This file is part of the GA3D 4DOverview project.
+#
+#   The GA3D 4DOverview core is free software: you can redistribute it and/or
+#   modify it under the terms of the GNU Lesser General Public License (LGPL)
+#   as published by the Free Software Foundation, either version 2.1 of the
+#   License, or (at your option) any later version.
+#
+#   This library is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#   GNU Lesser General Public License for more details.
+#
+#   You should have received a copy of the GNU Lesser General Public License
+#   along with this library. If not, see <https://www.gnu.org/licenses/>.
+#
+#   For custom extensions or commercial adaptations, please contact:
+#   ga3d.tech2021@gmail.com
+# ***************************************************************************
 import FreeCAD, FreeCADGui
 from PySide6 import QtWidgets, QtCore, QtGui
 from pathlib import Path

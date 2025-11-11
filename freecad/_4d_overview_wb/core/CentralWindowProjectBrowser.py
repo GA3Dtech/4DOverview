@@ -65,6 +65,10 @@ class ProjectBrowser(QtWidgets.QWidget):
         if not project_dirs:
             self.info_label.setText("no project found in this folder")
             return
+        
+        # Reverse alphabetical and numerical order
+        project_dirs.sort()
+        project_dirs.reverse()
 
         cols = 3
         for idx, project_dir in enumerate(project_dirs):

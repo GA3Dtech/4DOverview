@@ -15,7 +15,7 @@ description = "(4DOverview: A K.I.S.S. FreeCAD Workbench for easy file managemen
 readme = "README.md"
 license = {file = "LICENSE"}
 maintainers = [
-    {name = "GA3Dtech - Alain D. G.", email = "ga3d.tech2021@gmail.com"},
+    {name = "GA3Dtech - Alain D. G.", email = "  ---  "},
 ]
 requires-python = ">=3.8"
 dependencies = ["('numpy',)"]

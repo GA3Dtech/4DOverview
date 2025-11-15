@@ -23,4 +23,4 @@ Foundation’s terms.
 
 -----------------------------------------------
 (c) 2025 GA3D - www.ga3d.tech
-ga3d.tech2021@gmail.com
+  ---  

@@ -16,8 +16,8 @@
 #   You should have received a copy of the GNU Lesser General Public License
 #   along with this library. If not, see <https://www.gnu.org/licenses/>.
 #
-#   For custom extensions or commercial adaptations, please contact:
-#   ga3d.tech2021@gmail.com
+#   For custom extensions or commercial adaptations, please   ---  :
+#     ---  
 # ***************************************************************************
 import FreeCADGui
 import FreeCAD

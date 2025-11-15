@@ -1,7 +1,7 @@
 GA3D 4DOverview
 ========================
 Copyright (c) 2025 GA3D - www.ga3d.tech
-Contact: ga3d.tech2021@gmail.com
+Contact:   ---  
 
 License for the GA3D 4DOverview Core
 ------------------------------------
@@ -24,7 +24,7 @@ the LGPL license, as long as they dynamically link to the core and do
 not incorporate modified LGPL code.
 
 For commercial licensing or custom development inquiries:
-ga3d.tech2021@gmail.com
+  ---  
 
 Disclaimer
 ----------

@@ -1,6 +1,8 @@
 # 4DOverviewWB
 
-4DOverview: A K.I.S.S. FreeCAD Workbench for easy file management, including overview, Time Travel, Assets, Bill of Process, Bill of Materials, and more.
+4DOverview: A K.I.S.S. FreeCAD Workbench for easy **VISUAL** file management within FreeCAD, including overview, Time Travel, Assets, Bill of Process, Bill of Materials, and more. 
+All features are not ready yet, this workbench is in developpement.  
+The goal of this workbench is to gather, in a simple and practical way, various small macros I’ve developed over time to streamline the management of my FreeCAD projects.
 
 ## Functionalities
 
@@ -11,7 +13,7 @@
 - **Per-Project FreeCAD Insight**  
   Displays an overview of all FreeCAD parts and assemblies contained in each project.
 
-- **Construction History Extraction**  
+- **Tree Construction History Creation**  
   Generates a lightweight build/history view for individual parts.
 
 - **Asset Reuse Tools**  
@@ -21,13 +23,15 @@ More features will follow.
 The goal of this workbench is to gather, in a simple and practical way, various small macros I’ve developed over time to streamline the management of my FreeCAD projects.
 
 - **Global Project Overview**  
-![All projects overview](./docs/img/OverviewView.png){width=800}
+![All projects overview](./docs/img/ProjectsView.png){width=800}
 
 - **Per-Project FreeCAD Insight**  
-![P overview](./docs/img/ProjectsView.png){width=800}
+![P overview](./docs/img/OverviewView.png){width=800}
 
-- **Construction History Extraction**  
+- **Tree Construction History Creation**  
 ![Timeline overview](./docs/img/TimeLineView.png){width=800}
+
+ **General Presentation**  
 
  --- 
 ## Quick Start
@@ -39,9 +43,7 @@ App.getUserAppDataDir()
 
 Examples on different OS
 
-Linux: /home/user/.local/share/FreeCAD/Mod/
-
-       /home/user/.local/share/FreeCAD/v1-1/Mod (if you use a developper version)
+Linux: /home/user/.local/share/FreeCAD/Mod/  (/home/user/.local/share/FreeCAD/v1-1/Mod (for instance if you use a developper version))
 
 macOS: /Users/user/Library/Preferences/FreeCAD/Mod/
 

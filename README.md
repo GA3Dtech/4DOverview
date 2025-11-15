@@ -20,6 +20,15 @@
 More features will follow.  
 The goal of this workbench is to gather, in a simple and practical way, various small macros I’ve developed over time to streamline the management of my FreeCAD projects.
 
+- **Global Project Overview**  
+![All projects overview](./docs/img/OverviewView.png){width=800}
+
+- **Per-Project FreeCAD Insight**  
+![P overview](./docs/img/ProjectsView.png){width=800}
+
+- **Construction History Extraction**  
+![Timeline overview](./docs/img/TimeLineView.png){width=800}
+
  --- 
 ## Quick Start
 ### Manual installation

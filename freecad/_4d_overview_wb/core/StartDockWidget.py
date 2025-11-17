@@ -131,60 +131,48 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
                     os.makedirs(sub)
 
     def functionGenerateO(self) :
-        print("Generate 4DOverview of the project folder - Overview Only")
+        FreeCAD.Console.PrintMessage("Generate 4DOverview of the project folder - Overview Only")
         if self.path == None :
             self.selectFolder()
         CentralWindowOverview.fForAllFcstdO(self.path)
         CentralWindowOverview.makeView(self.path)
 
     def functionGenerateOT(self) :
-        print("Generate 4DOverview of the project folder and Versionning")
+        FreeCAD.Console.PrintMessage("Generate 4DOverview of the project folder and Versionning")
         if self.path == None :
             self.selectFolder()
         CentralWindowOverview.fForAllFcstd(self.path)
         CentralWindowOverview.makeView(self.path)
 
     def functionView(self) :
-        print("View 4DOverview of the project folder")
+        FreeCAD.Console.PrintMessage("View 4DOverview of the project folder")
         if self.path == None :
             self.selectFolder()
         CentralWindowOverview.makeView(self.path)
 
     def functionProjectBrowser(self) :
-        print("Project Browser start in central view")
         CentralWindowProjectBrowser.show_project_browser()
 
     def functionAssetCreator(self) :
-        print("starting the Asset Creator Widget")
+        FreeCAD.Console.PrintMessage("starting the Asset Creator Widget")
         AssetCreatorWidget.launch_asset_creator()
 
     def functionTimeLine(self) :
-        print("View 4DOverview TimeLine of actual file")
-
-
         doc = FreeCAD.ActiveDocument
         if doc and doc.FileName:
             print(doc.FileName)
         else:
             print("no active file")
+        FreeCAD.Console.PrintMessage(f'Viewing 4DOverview timeLine of "{doc.FileName}"')
         base_dir = os.path.dirname(doc.FileName)
         basename = os.path.basename(doc.FileName)               # ex: "myPart.FCStd"
         name_no_ext = os.path.splitext(basename)[0]             # ex: "myPart"
         target_path = os.path.join(base_dir,"4DOverview" ,f".{name_no_ext}")
 
         CentralWindowTimeLine.makeView(target_path)
-    
+
     def functionTimeInc(self) :
-        print("create a version (time increment) ")
-
-        #if self.path == None :
-        #    self.selectFolder()
         doc = FreeCAD.ActiveDocument
-        if doc and doc.FileName:
-            print(doc.FileName)
-        else:
-            print("no active file")
-
         CentralWindowTimeLine.save_incremented_version(doc)
 
 
@@ -205,6 +193,5 @@ def start() -> None:
         main_win.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock_widget)
         dock_widget.show()
     else :
-        print(f"The pannel '{dock_name}' is already open, bring it front")
         existing_dock.show()
         existing_dock.raise_()

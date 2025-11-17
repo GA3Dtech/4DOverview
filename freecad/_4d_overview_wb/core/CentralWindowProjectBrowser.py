@@ -80,7 +80,7 @@ class ProjectBrowser(QtWidgets.QWidget):
         # Select master folder.
         top_bar = QtWidgets.QHBoxLayout()
         self.path_edit = QtWidgets.QLineEdit()
-        self.path_edit.setPlaceholderText("Choose master folder")
+        self.path_edit.setPlaceholderText("Choose the master folder")
         self.path_btn = QtWidgets.QPushButton("...")
         self.path_btn.clicked.connect(self.select_root_folder)
         top_bar.addWidget(self.path_edit, 1)
@@ -99,7 +99,7 @@ class ProjectBrowser(QtWidgets.QWidget):
         self.scroll.setWidget(self.container)
 
         # Label.
-        self.info_label = QtWidgets.QLabel("first select a folder")
+        self.info_label = QtWidgets.QLabel("First select a folder")
         layout.addWidget(self.info_label)
 
     def select_root_folder(self):
@@ -119,12 +119,12 @@ class ProjectBrowser(QtWidgets.QWidget):
                 w.setParent(None)
 
         if not root_path.exists():
-            self.info_label.setText(f"no folder{root_path}")
+            self.info_label.setText(f'No folder "{root_path}"')
             return
 
         project_dirs = [p for p in root_path.iterdir() if p.is_dir()]
         if not project_dirs:
-            self.info_label.setText("no project found in this folder")
+            self.info_label.setText("No project found in this folder")
             return
 
         # Reverse alphabetical and numerical order.

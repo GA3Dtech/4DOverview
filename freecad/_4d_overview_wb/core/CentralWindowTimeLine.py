@@ -116,10 +116,9 @@ class CentralView(QtWidgets.QWidget):
 
         path = Path(path)
         clicked_fcstd = path.parent / (path.stem + ".FCStd")
-        print(clicked_fcstd)
 
         if not clicked_fcstd.exists():
-            QtWidgets.QMessageBox.warning(self, "File not found", f"File not found: {clicked_fcstd}")
+            QtWidgets.QMessageBox.warning(self, "File not found", f'File not found: "{clicked_fcstd}"')
             return
 
         # Determine the real file to overwrite.
@@ -141,12 +140,11 @@ class CentralView(QtWidgets.QWidget):
 
         # Check existence.
         if not real_fcstd.exists():
-            print(f"Original file not found: {real_fcstd}")
-        else:
-            print(f"Original file detected: {real_fcstd}")
-
-        if real_fcstd is None:
-            QtWidgets.QMessageBox.warning(self, "Original not found", "Could not locate the real file to overwrite.")
+            QtWidgets.QMessageBox.warning(
+                    self,
+                    "Original file not found",
+                    'Could not locate the real file to overwrite for "{clicked_fcstd}".',
+            )
             return
 
         # Create a small dialog window.
@@ -154,7 +152,7 @@ class CentralView(QtWidgets.QWidget):
         dlg.setWindowTitle("File Action")
         layout = QtWidgets.QVBoxLayout(dlg)
 
-        label = QtWidgets.QLabel(f"Clicked file: {clicked_fcstd}\n\nOriginal file: {real_fcstd}")
+        label = QtWidgets.QLabel(f'Clicked file: "{clicked_fcstd}"\nOriginal file: "{real_fcstd}"')
         layout.addWidget(label)
 
         btn_open = QtWidgets.QPushButton("Open this file")
@@ -233,8 +231,8 @@ def save_incremented_version(doc: FreeCAD.Document) -> None:
     """
 
     # Validate document.
-    if not doc or not doc.FileName:
-        FreeCAD.Console.PrintError("Document not found\n")
+    if not doc or (not hasattr(doc, "FileName")) or not doc.FileName:
+        FreeCAD.Console.PrintError(f'Document "{doc}" not found\n')
         return
 
     filepath = Path(doc.FileName)

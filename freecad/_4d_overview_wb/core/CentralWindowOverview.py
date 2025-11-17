@@ -112,7 +112,6 @@ def fForAllFcstd(folder_path):
     for filename in os.listdir(folder_path):
         if filename.lower().endswith(".fcstd"):
             file_path = os.path.join(folder_path, filename)
-            print(f"Opening {file_path}")
 
             # open file
             doc = FreeCAD.open(file_path)
@@ -132,7 +131,7 @@ def fForAllFcstdO(folder_path) :
     for filename in os.listdir(folder_path):
         if filename.lower().endswith(".fcstd"):
             file_path = os.path.join(folder_path, filename)
-            print(f"Opening {file_path}")
+            FreeCAD.Console.PrintMessage(f'Opening "{file_path}"')
 
             # open file
             doc = FreeCAD.open(file_path)
@@ -142,12 +141,11 @@ def fForAllFcstdO(folder_path) :
 
             # close file
             FreeCAD.closeDocument(doc.Name)
-            print(f"{filename} done & closed \n")
+            FreeCAD.Console.PrintMessage(f'"{filename}" done & closed\n')
 
 
 def mycodeO(doc: FreeCAD.Document) -> None:
     # Function to execute for each .fcstd file.
-    print(f"Document {doc.Name}\n")
 
     if not doc or not doc.FileName:
         FreeCAD.Console.PrintError("No document found\n")
@@ -213,7 +211,6 @@ def mycode(doc: FreeCAD.Document | None) -> None:
     Raises:
         Prints error messages if the document is invalid or if thumbnail extraction fails.
     """
-    print(f"Document {doc.Name} \n")
 
     if not doc or not doc.FileName:
         FreeCAD.Console.PrintError("No document found\n")

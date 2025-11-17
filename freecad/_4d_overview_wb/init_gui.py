@@ -33,12 +33,6 @@ class _4DOverviewWB(Gui.Workbench):
         This function is called at the first activation of the workbench.
         here is the place to import all the commands
         """
-
-        
-
-        App.Console.PrintMessage(translate(
-            "Log",
-            "Switching to _4d_overview_wb") + "\n")
         App.Console.PrintMessage(translate(
             "Log",
             "Run a numpy function:") + "sqrt(100) = {}\n".format(my_numpy_function.my_foo(100)))
@@ -51,21 +45,13 @@ class _4DOverviewWB(Gui.Workbench):
         '''
         code which should be computed when a user switch to this workbench
         '''
-    
         StartDockWidget.start()
         #CentralWindowGeneric.makeView()
-
-        App.Console.PrintMessage(translate(
-            "Log",
-            "Workbench _4d_overview_wb activated.") + "\n")
 
     def Deactivated(self):
         '''
         code which should be computed when this workbench is deactivated
         '''
-        App.Console.PrintMessage(translate(
-            "Log",
-            "Workbench _4d_overview_wb de-activated.") + "\n")
-
+        pass
 
 Gui.addWorkbench(_4DOverviewWB())

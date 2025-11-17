@@ -207,14 +207,14 @@ def increment_version(last_version: str) -> str:
     if not last_version or len(last_version) != 2:
         return "aa"
     letters = string.ascii_lowercase
-    a, b = last_version
-    if b != 'z':
-        return a + letters[letters.index(b) + 1]
+    first, second = last_version
+    if second != "z":
+        return first + letters[letters.index(second) + 1]
     else:
-        if a != 'z':
-            return letters[letters.index(a) + 1] + 'a'
+        if first != "z":
+            return letters[letters.index(first) + 1] + "a"
         else:
-            return 'aa'  # fallback if 'zz' is reached
+            return "aa"  # fallback if "zz" is reached.
 
 
 def save_incremented_version(doc: FreeCAD.Document) -> None:

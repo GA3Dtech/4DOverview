@@ -22,7 +22,7 @@
 # ***************************************************************************
 import FreeCADGui
 import FreeCAD
-from PySide6 import QtWidgets , QtCore, QtGui
+from PySide import QtWidgets , QtCore, QtGui  # FreeCAD's PySide!
 import os
 import string, zipfile
 from pathlib import Path

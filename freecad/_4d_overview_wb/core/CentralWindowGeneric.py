@@ -1,6 +1,6 @@
 
 import FreeCADGui
-from PySide6 import QtWidgets
+from PySide import QtWidgets  # FreeCAD's PySide!
 
 class CentralView(QtWidgets.QWidget):
     def __init__(self):

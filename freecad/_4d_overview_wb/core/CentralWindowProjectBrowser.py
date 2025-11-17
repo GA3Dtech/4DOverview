@@ -20,7 +20,7 @@
 #     ---  
 # ***************************************************************************
 import FreeCAD, FreeCADGui
-from PySide6 import QtWidgets, QtCore, QtGui
+from PySide import QtWidgets, QtCore, QtGui  # Freecad's PySide!
 from pathlib import Path
 import os
 

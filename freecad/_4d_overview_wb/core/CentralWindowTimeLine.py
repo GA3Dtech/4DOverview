@@ -125,7 +125,6 @@ class CentralView(QtWidgets.QWidget):
         # Example: /.../4DOverview/.Nouveau2/Nouveau2_ab.FCStd -> /.../Nouveau2.FCStd.
         real_fcstd = None
         path = Path(path)
-        base_name = path.stem.split("_")[0]  # remove version suffix (_ab, _v2, etc.)
 
         # The real folder is two levels above the .FCStd file.
         # It has the same name as the hidden folder but without the leading dot.

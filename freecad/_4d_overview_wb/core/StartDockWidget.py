@@ -47,12 +47,12 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         layout.addWidget(self.ProjectBrowserButton)
         self.ProjectBrowserButton.clicked.connect(self.functionProjectBrowser)
 
-        # --- Ligne horizontale   ---
+        # Horizontal line.
         line = QtWidgets.QFrame()
-        line.setFrameShape(QtWidgets.QFrame.HLine)       # Ligne horizontale
+        line.setFrameShape(QtWidgets.QFrame.HLine)
         layout.addWidget(line)
 
-        # --- Project folder selection ---
+        # Project folder selection.
         self.path = None
         toplineQW = QtWidgets.QHBoxLayout()
         self.folderLabel = QtWidgets.QLabel("Project Folder:")
@@ -64,39 +64,37 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         toplineQW .addWidget(self.browseBtn)
         layout.addLayout(toplineQW)
 
-         # --- Overview view button ---
+         # Overview view button.
         self.OverviewViewButton = QtWidgets.QPushButton("Overview - View")
         self.OverviewViewButton.setMinimumHeight(40)
         layout.addWidget(self.OverviewViewButton)
         self.OverviewViewButton.clicked.connect(self.functionView)
 
-        # --- Overview generator button ---
-
+        # Overview generator button.
         self.OverviewGeneratorButtonO = QtWidgets.QPushButton("Overview - Generate O only")
         self.OverviewGeneratorButtonO.setMinimumHeight(40)
         layout.addWidget(self.OverviewGeneratorButtonO)
         self.OverviewGeneratorButtonO.clicked.connect(self.functionGenerateO)
 
-        # --- Overview generator button ---
-
+        # Overview+timeline generator button.
         self.OverviewGeneratorButtonOT = QtWidgets.QPushButton("Overview - Generate O + T")
         self.OverviewGeneratorButtonOT.setMinimumHeight(40)
         layout.addWidget(self.OverviewGeneratorButtonOT)
         self.OverviewGeneratorButtonOT.clicked.connect(self.functionGenerateOT)
 
-        # --- Ligne horizontale   ---
+        # Horizontal line.
         line = QtWidgets.QFrame()
-        line.setFrameShape(QtWidgets.QFrame.HLine)       # Ligne horizontale
+        line.setFrameShape(QtWidgets.QFrame.HLine)
         layout.addWidget(line)
 
-        # --- Asset creator widget button ---
+        # Asset creator widget button.
         self.AssetCreatorButton = QtWidgets.QPushButton("Asset Creator")
         self.AssetCreatorButton.setMinimumHeight(40)
         layout.addWidget(self.AssetCreatorButton)
         self.AssetCreatorButton.clicked.connect(self.functionAssetCreator)
         layout.addWidget(line)
 
-        # --- TimeLine view button ---
+        # TimeLine view button.
         self.TimeLineViewButton = QtWidgets.QPushButton("Timeline - View")
         self.TimeLineViewButton.setMinimumHeight(40)
         layout.addWidget(self.TimeLineViewButton)
@@ -107,23 +105,21 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         layout.addWidget(self.TimeLineIncButton)
         self.TimeLineIncButton.clicked.connect(self.functionTimeInc)
 
-
-        # --- Test Text ---
+        # Test Text.
         label = QtWidgets.QLabel("Bienvenue dans 4D Overview")
         layout.addWidget(label)
 
-        #---------------GUI Prepa END ------------------#
-
-    # --- 
     def selectFolder(self):
         self.path = QtWidgets.QFileDialog.getExistingDirectory(self, "Choose a folder")
         if self.path:
             self.folderPath.setText(self.path)
             self.checkFolderStructure4D(self.path)
 
-    # ---
     def checkFolderStructure4D(self, root):
-        """Create the 4DOverview files Structures : ./4DOverview/.FileName"""
+        """Create the 4DOverview files Structures.
+
+        Create the 4DOverview files Structures.: ./4DOverview/.FileName.
+        """
         overview = os.path.join(root, "4DOverview")
         if not os.path.exists(overview):
             os.makedirs(overview)
@@ -134,7 +130,6 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
                 if not os.path.exists(sub):
                     os.makedirs(sub)
 
-    # ---
     def functionGenerateO(self) :
         print("Generate 4DOverview of the project folder - Overview Only")
         if self.path == None :
@@ -142,7 +137,6 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         CentralWindowOverview.fForAllFcstdO(self.path)
         CentralWindowOverview.makeView(self.path)
 
-    # ---
     def functionGenerateOT(self) :
         print("Generate 4DOverview of the project folder and Versionning")
         if self.path == None :
@@ -150,29 +144,23 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         CentralWindowOverview.fForAllFcstd(self.path)
         CentralWindowOverview.makeView(self.path)
 
-    # ---
     def functionView(self) :
         print("View 4DOverview of the project folder")
         if self.path == None :
             self.selectFolder()
         CentralWindowOverview.makeView(self.path)
 
-        # ---
     def functionProjectBrowser(self) :
         print("Project Browser start in central view")
         CentralWindowProjectBrowser.show_project_browser()
 
-         # ---
     def functionAssetCreator(self) :
         print("starting the Asset Creator Widget")
         AssetCreatorWidget.launch_asset_creator()
 
-    # ---
     def functionTimeLine(self) :
         print("View 4DOverview TimeLine of actual file")
 
-        #if self.path == None :
-        #    self.selectFolder()
 
         doc = FreeCAD.ActiveDocument
         if doc and doc.FileName:
@@ -186,7 +174,6 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
 
         CentralWindowTimeLine.makeView(target_path)
     
-        # ---
     def functionTimeInc(self) :
         print("create a version (time increment) ")
 

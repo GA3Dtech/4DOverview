@@ -40,22 +40,22 @@ class CentralView(QtWidgets.QWidget):
         label = QtWidgets.QLabel(f"<h2>Project: {projectname}</h2>")
         layout.addWidget(label)
 
-        # Scrollable area containing all file thumbnails
+        # Scrollable area containing all file thumbnails.
         self.scroll = QtWidgets.QScrollArea()
         self.scroll.setWidgetResizable(True)
         layout.addWidget(self.scroll, 1)
 
-        # Grid widget for content
+        # Grid widget for content.
         self.container = QtWidgets.QWidget()
         self.grid = QtWidgets.QGridLayout(self.container)
         self.grid.setSpacing(10)
         self.scroll.setWidget(self.container)
 
-        # Label below the grid
+        # Label below the grid.
         self.info_label = QtWidgets.QLabel("Click here")
         layout.addWidget(self.info_label)
 
-        # Load thumbnails on initialization
+        # Load thumbnails on initialization.
         self.load_thumbnails()
 
     def load_thumbnails(self):
@@ -122,24 +122,24 @@ class CentralView(QtWidgets.QWidget):
             QtWidgets.QMessageBox.warning(self, "File not found", f"File not found: {clicked_fcstd}")
             return
 
-        # Determine the real file to overwrite
-        # Example: /.../4DOverview/.Nouveau2/Nouveau2_ab.FCStd -> /.../Nouveau2.FCStd
+        # Determine the real file to overwrite.
+        # Example: /.../4DOverview/.Nouveau2/Nouveau2_ab.FCStd -> /.../Nouveau2.FCStd.
         real_fcstd = None
         path = Path(path)
         base_name = path.stem.split("_")[0]  # remove version suffix (_ab, _v2, etc.)
 
-        # The real folder is two levels above the .FCStd file
-        # It has the same name as the hidden folder but without the leading dot
+        # The real folder is two levels above the .FCStd file.
+        # It has the same name as the hidden folder but without the leading dot.
         hidden_dir = path.parent.name
         clean_dir = hidden_dir[1:] if hidden_dir.startswith(".") else hidden_dir
 
-        # Go three levels up (out of 4DOverview)
+        # Go three levels up (out of 4DOverview).
         target_parent = path.parent.parent.parent
 
-        # Build the path of the real file
+        # Build the path of the real file.
         real_fcstd = target_parent / (clean_dir + ".FCStd")
 
-        # Check existence
+        # Check existence.
         if not real_fcstd.exists():
             print(f"Original file not found: {real_fcstd}")
         else:
@@ -149,7 +149,7 @@ class CentralView(QtWidgets.QWidget):
             QtWidgets.QMessageBox.warning(self, "Original not found", "Could not locate the real file to overwrite.")
             return
 
-        # Create a small dialog window
+        # Create a small dialog window.
         dlg = QtWidgets.QDialog(self)
         dlg.setWindowTitle("File Action")
         layout = QtWidgets.QVBoxLayout(dlg)
@@ -165,7 +165,7 @@ class CentralView(QtWidgets.QWidget):
         layout.addWidget(btn_overwrite)
         layout.addWidget(btn_cancel)
 
-        # Define button actions
+        # Define button actions.
         def open_file():
             FreeCAD.open(str(clicked_fcstd))
             dlg.accept()
@@ -179,7 +179,7 @@ class CentralView(QtWidgets.QWidget):
             if reply == QtWidgets.QMessageBox.Yes:
                 try:
                     shutil.copy2(clicked_fcstd, real_fcstd)
-                    # Automatically reopen the updated file
+                    # Automatically reopen the updated file.
                     try:
                         for doc in FreeCAD.listDocuments().values():
                             if Path(doc.FileName) == real_fcstd:
@@ -205,9 +205,8 @@ class CentralView(QtWidgets.QWidget):
         dlg.exec()
 
 
-# --- Incremental File Naming
 def increment_version(last_version):
-    """Incremental version naming with two lowercase letters: 'aa' -> 'ab', ..., 'az' -> 'ba'"""
+    """Incremental version naming with two lowercase letters: 'aa', 'ab', ..."""
     if not last_version or len(last_version) != 2:
         return "aa"
     letters = string.ascii_lowercase
@@ -223,6 +222,8 @@ def increment_version(last_version):
 
 def save_incremented_version(doc):
     """
+    Save an incremented version of a FreeCAD document.
+
     Save an incremented version of a FreeCAD document (.FCStd)
     into <file_path>/4DOverview/.FileName/
     with thumbnail extraction or capture if missing.
@@ -231,7 +232,7 @@ def save_incremented_version(doc):
         save_incremented_version(FreeCAD.ActiveDocument)
     """
 
-    # --- Validate document
+    # Validate document.
     if not doc or not doc.FileName:
         FreeCAD.Console.PrintError("Document not found\n")
         return
@@ -240,12 +241,12 @@ def save_incremented_version(doc):
     dirname = filepath.parent
     basename = filepath.stem
 
-    # --- Create backup folders
+    # Create backup folders.
     overview_dir = dirname / "4DOverview"
     project_dir = overview_dir / f".{basename}"
     project_dir.mkdir(parents=True, exist_ok=True)
 
-    # --- Find existing versions
+    # Find existing versions.
     existing = [f for f in os.listdir(project_dir) if f.endswith(".FCStd")]
     existing_versions = []
     for f in existing:
@@ -258,18 +259,18 @@ def save_incremented_version(doc):
     last_version = sorted(existing_versions)[-1] if existing_versions else None
     new_version = increment_version(last_version)
 
-    # --- Save main document
+    # Save the main document.
     doc.save()
 
-    # --- Build full paths
+    # Build full paths.
     fcstd_path = project_dir / f"{basename}_{new_version}.FCStd"
     png_path = project_dir / f"{basename}_{new_version}.png"
 
-    # --- Save versioned copy
+    # Save versioned copy.
     doc.saveCopy(str(fcstd_path))
     FreeCAD.Console.PrintMessage(f"Versioned file {fcstd_path}\n")
 
-    # --- Extract thumbnail
+    # Extract thumbnail.
     try:
         with zipfile.ZipFile(fcstd_path, 'r') as z:
             thumb_candidates = [f for f in z.namelist() if f.lower().endswith("thumbnail.png")]
@@ -292,7 +293,7 @@ def save_incremented_version(doc):
 
 
 class ThumbnailWidget(QtWidgets.QFrame):
-    """Widget that displays a clickable thumbnail"""
+    """Widget that displays a clickable thumbnail."""
     clicked = QtCore.Signal(str)
 
     def __init__(self, img_path, size=200):
@@ -320,12 +321,12 @@ class ThumbnailWidget(QtWidgets.QFrame):
             }
         """)
 
-        # Vertical layout
+        # Main vertical layout.
         layout = QtWidgets.QVBoxLayout(self)
         layout.setContentsMargins(6, 6, 6, 6)
         layout.setSpacing(4)
 
-        # Thumbnail image
+        # Thumbnail image.
         pix = QtGui.QPixmap(img_path)
         if not pix.isNull():
             pix = pix.scaled(size - 20, size - 40, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation)
@@ -335,7 +336,7 @@ class ThumbnailWidget(QtWidgets.QFrame):
         self.label_img.setAlignment(QtCore.Qt.AlignCenter)
         layout.addWidget(self.label_img, stretch=1)
 
-        # File name without extension
+        # File name without extension.
         filename = os.path.splitext(os.path.basename(img_path))[0]
         self.label_name = QtWidgets.QLabel(filename)
         self.label_name.setAlignment(QtCore.Qt.AlignCenter)

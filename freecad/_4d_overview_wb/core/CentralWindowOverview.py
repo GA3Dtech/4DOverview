@@ -36,29 +36,28 @@ class CentralView(QtWidgets.QWidget):
 
         super().__init__()
         self.projectfolderpath = projectfolderpath
+
+        # Main vertical layout.
         layout = QtWidgets.QVBoxLayout(self)
         label = QtWidgets.QLabel(f"<h2>Project: {projectname}</h2>")
-       #button = QtWidgets.QPushButton("Click me")
         layout.addWidget(label)
-        #layout.addWidget(button)
-        #button.clicked.connect(lambda: label.setText("Hello :)"))
 
-        #scrollable area with all files miniatures
+        # Scrollable area for the grid.
         self.scroll = QtWidgets.QScrollArea()
         self.scroll.setWidgetResizable(True)
         layout.addWidget(self.scroll, 1)
 
-        # grid widget for content
+        # Grid widget for content.
         self.container = QtWidgets.QWidget()
         self.grid = QtWidgets.QGridLayout(self.container)
         self.grid.setSpacing(10)
         self.scroll.setWidget(self.container)
 
-        # --- label on Miniature
+        # Label on thumbnail.
         self.info_label = QtWidgets.QLabel("Click here")
         layout.addWidget(self.info_label)
 
-        # initial miniature loading
+        # Initial thumbnail loading.
         self.load_thumbnails()
 
     def load_thumbnails(self):
@@ -101,19 +100,15 @@ class CentralView(QtWidgets.QWidget):
 
         # opening the targeted file
         path = Path(path)
-        #path = path.parents[1]  # 2 folder back
-        #fcstd = os.path.splitext(path)[0] + ".FCStd"
         fcstd = path.parent.parent / (path.stem + ".FCStd")
-        print(fcstd)
         if os.path.exists(fcstd):
             FreeCAD.open(str(fcstd))
         else:
             QtWidgets.QMessageBox.information(self, "Action thumbnail clicked", f"File not found: {fcstd}")
 
 
-# --- function to find all file .fcstd in the folder ---
-def fForAllFcstd(folder_path) :
-
+def fForAllFcstd(folder_path):
+    """Find all .fcstd files in the folder and run `mycode` on them."""
     for filename in os.listdir(folder_path):
         if filename.lower().endswith(".fcstd"):
             file_path = os.path.join(folder_path, filename)
@@ -196,6 +191,28 @@ def mycodeO(doc):
 
 
 def mycode (doc):
+    """
+    Save a versioned backup and extract the thumbnail for a FreeCAD document.
+
+    This function:
+      - Ensures a '4DOverview' folder and a hidden subfolder for the document exist in the project directory.
+      - Determines the next available two-letter version suffix (e.g., 'aa', 'ab', ...).
+      - Saves the current document and a versioned copy (.FCStd) in the subfolder.
+      - Extracts the thumbnail image from the .FCStd file and saves it both in the subfolder and the main '4DOverview' folder.
+      - (Optionally, if enabled) Exports a GLTF file of all visible objects in the document.
+
+    Args:
+        doc (FreeCAD.Document | None): The FreeCAD document to process.
+
+    Side Effects:
+        - Creates directories and files on disk.
+        - Saves and copies FreeCAD documents.
+        - Writes PNG thumbnail images.
+        - Prints messages to the FreeCAD console.
+
+    Raises:
+        Prints error messages if the document is invalid or if thumbnail extraction fails.
+    """
     print(f"Document {doc.Name} \n")
 
     if not doc or not doc.FileName:
@@ -359,7 +376,6 @@ class ThumbnailWidget(QtWidgets.QFrame):
     def mousePressEvent(self, event):
         if event.button() == QtCore.Qt.LeftButton:
             self.clicked.emit(self.img_path)
-            #print(self.img_path)
 
 
 def makeView(projectfolderpath) :

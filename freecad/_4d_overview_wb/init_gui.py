@@ -5,7 +5,6 @@ from freecad. _4d_overview_wb import my_numpy_function
 
 #core function of the wb loading
 from freecad. _4d_overview_wb.core import StartDockWidget
-#from freecad. _4d_overview_wb.core import CentralWindowGeneric
 
 translate=App.Qt.translate
 QT_TRANSLATE_NOOP=App.Qt.QT_TRANSLATE_NOOP
@@ -44,7 +43,7 @@ class _4DOverviewWB(Gui.Workbench):
             "Log",
             "Run a numpy function:") + "sqrt(100) = {}\n".format(my_numpy_function.my_foo(100)))
 
-        # NOTE: Context for this commands must be "Workbench"
+        # NOTE: Context for this commands must be "Workbench".
         self.appendToolbar(QT_TRANSLATE_NOOP("Workbench", "Tools"), self.toolbox)
         self.appendMenu(QT_TRANSLATE_NOOP("Workbench", "Tools"), self.toolbox)
 

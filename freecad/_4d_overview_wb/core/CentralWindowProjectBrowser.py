@@ -27,15 +27,16 @@ from PySide import QtCore, QtGui, QtWidgets  # Freecad's PySide!
 from freecad. _4d_overview_wb.core import CentralWindowOverview
 
 class ProjectBrowser(QtWidgets.QWidget):
-    """Main view to browse projects in the main folder containing all projects"""
+    """Main view to browse projects in the main folder containing all projects."""
+
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Project Browser")
 
-        # --- Layout 
+        # Main layout.
         layout = QtWidgets.QVBoxLayout(self)
 
-        # --- select master folder ---
+        # Select master folder.
         top_bar = QtWidgets.QHBoxLayout()
         self.path_edit = QtWidgets.QLineEdit()
         self.path_edit.setPlaceholderText("Choose master folder")
@@ -45,24 +46,23 @@ class ProjectBrowser(QtWidgets.QWidget):
         top_bar.addWidget(self.path_btn)
         layout.addLayout(top_bar)
 
-        # --- Zone scrollable  ---
+        # Main scrollable to contain the grid..
         self.scroll = QtWidgets.QScrollArea()
         self.scroll.setWidgetResizable(True)
         layout.addWidget(self.scroll, 1)
 
-        # --- grid container ---
+        # Grid container for project thumbnails.
         self.container = QtWidgets.QWidget()
         self.grid = QtWidgets.QGridLayout(self.container)
         self.grid.setSpacing(15)
         self.scroll.setWidget(self.container)
 
-        # --- Label  ---
+        # Label.
         self.info_label = QtWidgets.QLabel("first select a folder")
         layout.addWidget(self.info_label)
 
-    # -------------------------------------------------------------------------
     def select_root_folder(self):
-        """choose root project folder"""
+        """Ask for the root project folder and load all projects within it."""
         folder = QtWidgets.QFileDialog.getExistingDirectory(
             self, "Select root folder", str(Path.home())
         )
@@ -70,9 +70,8 @@ class ProjectBrowser(QtWidgets.QWidget):
             self.path_edit.setText(folder)
             self.load_projects(Path(folder))
 
-    # -------------------------------------------------------------------------
     def load_projects(self, root_path: Path):
-        """look at all subfolder to extract thumbnails"""
+        """Look at all subfolder to extract thumbnails."""
         for i in reversed(range(self.grid.count())):
             w = self.grid.itemAt(i).widget()
             if w:
@@ -86,8 +85,8 @@ class ProjectBrowser(QtWidgets.QWidget):
         if not project_dirs:
             self.info_label.setText("no project found in this folder")
             return
-        
-        # Reverse alphabetical and numerical order
+
+        # Reverse alphabetical and numerical order.
         project_dirs.sort()
         project_dirs.reverse()
 
@@ -102,7 +101,7 @@ class ProjectBrowser(QtWidgets.QWidget):
 
     # -------------------------------------------------------------------------
     def make_project_thumbnail(self, project_dir: Path):
-        """Grey (if empty) or mixed miniature generation """
+        """Grey (if empty) or mixed thumbnail generation."""
         overview = project_dir / "4DOverview"
         thumbs = list(overview.glob("*.png"))
 
@@ -111,7 +110,7 @@ class ProjectBrowser(QtWidgets.QWidget):
             pix.fill(QtGui.QColor("#cccccc"))  # grey if no images
             return ProjectThumbnail(project_dir, pix)
 
-        # load 4 miniature max
+        # Load 4 thumbnails max.
         thumbs = thumbs[:4]
         size = 200
         composite = QtGui.QPixmap(size, size)

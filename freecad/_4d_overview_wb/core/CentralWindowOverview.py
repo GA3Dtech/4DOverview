@@ -18,7 +18,7 @@
 #   along with this library. If not, see <https://www.gnu.org/licenses/>.
 #
 #   For custom extensions or commercial adaptations, please   ---  :
-#     ---  
+#     ---
 # ***************************************************************************
 import os
 import string
@@ -31,9 +31,8 @@ from PySide import QtCore, QtGui, QtWidgets  # FreeCAD's PySide!
 
 
 class CentralView(QtWidgets.QWidget):
-    def __init__(self,projectfolderpath):
+    def __init__(self, projectfolderpath):
         projectname = str(Path(projectfolderpath).name)
-
 
         super().__init__()
         self.projectfolderpath = projectfolderpath
@@ -62,8 +61,6 @@ class CentralView(QtWidgets.QWidget):
         # initial miniature loading
         self.load_thumbnails()
 
-        
-
     def load_thumbnails(self):
         """image loading from folder """
         #THUMB_DIR = os.path.expanduser("~/4DOverview")  # path to 4DOverview folder
@@ -81,7 +78,7 @@ class CentralView(QtWidgets.QWidget):
 
         images = [f for f in os.listdir(THUMB_DIR)
                   if f.lower().endswith(('.png', '.jpg', '.jpeg', '.svg'))]
-        
+
         # alphabetical and numerical order
         images.sort()
 
@@ -98,7 +95,7 @@ class CentralView(QtWidgets.QWidget):
             r, c = divmod(idx, cols)
             self.grid.addWidget(thumb, r, c)
 
-    def on_thumbnail_clicked(self, path):
+    def on_thumbnail_clicked(self, path: str | Path):
         """Action to do when clicking the miniature """
         self.info_label.setText(f" thumbnail clicked {os.path.basename(path)}")
 
@@ -109,7 +106,7 @@ class CentralView(QtWidgets.QWidget):
         fcstd = path.parent.parent / (path.stem + ".FCStd")
         print(fcstd)
         if os.path.exists(fcstd):
-            FreeCAD.open(str(fcstd))  
+            FreeCAD.open(str(fcstd))
         else:
             QtWidgets.QMessageBox.information(self, "Action thumbnail clicked", f"File not found: {fcstd}")
 
@@ -124,16 +121,16 @@ def fForAllFcstd(folder_path) :
 
             # open file
             doc = FreeCAD.open(file_path)
-            
+
             # code for each file
             mycode(doc)
-            
-            # Sauvegarder le document 
+
+            # Sauvegarder le document
             # doc.save()
-            
+
             # close file
             FreeCAD.closeDocument(doc.Name)
-            print(f"{filename} done & closed \n")
+
 
 def fForAllFcstdO(folder_path) :
 
@@ -144,21 +141,18 @@ def fForAllFcstdO(folder_path) :
 
             # open file
             doc = FreeCAD.open(file_path)
-            
+
             # code for each file
             mycodeO(doc)
-            
-            # Sauvegarder le document 
-            # doc.save()
-            
+
             # close file
             FreeCAD.closeDocument(doc.Name)
             print(f"{filename} done & closed \n")
 
 
-# --- function to execute for each file .fcstd ---
-def mycodeO (doc):
-    print(f"Document {doc.Name} \n")
+def mycodeO(doc):
+    # Function to execute for each .fcstd file.
+    print(f"Document {doc.Name}\n")
 
     if not doc or not doc.FileName:
         FreeCAD.Console.PrintError("No document found\n")
@@ -193,7 +187,7 @@ def mycodeO (doc):
                     FreeCAD.Console.PrintMessage("Miniature extracted.\n")
                 else:
                     raise FileNotFoundError
-                
+
         except Exception:
             # fallback : capture de la vue actuelle
             FreeCAD.Console.PrintMessage("No Miniature found , capture scene instead.\n")
@@ -293,6 +287,7 @@ def mycode (doc):
 
         FreeCAD.Console.PrintMessage(f"Version {new_version} saved in {project_dir}\n")
 
+
 # --- Incremental File Naming
 def increment_version(last_version):
     """Incremental version numbering with 2 smalle letters indice : 'aa' -> 'ab', ..., 'az' -> 'ba'"""
@@ -307,7 +302,7 @@ def increment_version(last_version):
             return letters[letters.index(a) + 1] + 'a'
         else:
             return 'aa'  # sécu au cas où on atteint 'zz'
-        
+
 
 class ThumbnailWidget(QtWidgets.QFrame):
     """Widget to get a clickable Miniature Thumbnail"""
@@ -318,7 +313,7 @@ class ThumbnailWidget(QtWidgets.QFrame):
         self.img_path = img_path
         self.size = size
 
-        
+
         self.setFixedSize(size, size)
         self.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.setLineWidth(0)
@@ -365,9 +360,9 @@ class ThumbnailWidget(QtWidgets.QFrame):
         if event.button() == QtCore.Qt.LeftButton:
             self.clicked.emit(self.img_path)
             #print(self.img_path)
-    
-def makeView(projectfolderpath) :
 
+
+def makeView(projectfolderpath) :
     # create and insert central view
     mw = FreeCADGui.getMainWindow()
     mdi = mw.findChild(QtWidgets.QMdiArea)

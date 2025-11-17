@@ -17,7 +17,7 @@
 #   along with this library. If not, see <https://www.gnu.org/licenses/>.
 #
 #   For custom extensions or commercial adaptations, please   ---  :
-#     ---  
+#     ---
 # ***************************************************************************
 import os
 import shutil

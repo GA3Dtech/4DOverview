@@ -2,6 +2,7 @@
 import FreeCADGui
 from PySide import QtWidgets  # FreeCAD's PySide!
 
+
 class CentralView(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()

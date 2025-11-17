@@ -17,7 +17,7 @@
 #   along with this library. If not, see <https://www.gnu.org/licenses/>.
 #
 #   For custom extensions or commercial adaptations, please   ---  :
-#     ---  
+#     ---
 # ***************************************************************************
 
 import os
@@ -41,8 +41,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         self.setWindowTitle("4D Overview - Main")
         layout = QtWidgets.QVBoxLayout(self)
 
-          # --- Project Browser view button ---
-
+        # Project Browser view button.
         self.ProjectBrowserButton = QtWidgets.QPushButton("Projects Browser")
         self.ProjectBrowserButton.setMinimumHeight(40)
         layout.addWidget(self.ProjectBrowserButton)
@@ -65,10 +64,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         toplineQW .addWidget(self.browseBtn)
         layout.addLayout(toplineQW)
 
-        
-
          # --- Overview view button ---
-
         self.OverviewViewButton = QtWidgets.QPushButton("Overview - View")
         self.OverviewViewButton.setMinimumHeight(40)
         layout.addWidget(self.OverviewViewButton)
@@ -94,16 +90,13 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         layout.addWidget(line)
 
         # --- Asset creator widget button ---
-
         self.AssetCreatorButton = QtWidgets.QPushButton("Asset Creator")
         self.AssetCreatorButton.setMinimumHeight(40)
         layout.addWidget(self.AssetCreatorButton)
         self.AssetCreatorButton.clicked.connect(self.functionAssetCreator)
-
         layout.addWidget(line)
 
         # --- TimeLine view button ---
-
         self.TimeLineViewButton = QtWidgets.QPushButton("Timeline - View")
         self.TimeLineViewButton.setMinimumHeight(40)
         layout.addWidget(self.TimeLineViewButton)
@@ -115,16 +108,9 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         self.TimeLineIncButton.clicked.connect(self.functionTimeInc)
 
 
-
-
-
         # --- Test Text ---
         label = QtWidgets.QLabel("Bienvenue dans 4D Overview")
         layout.addWidget(label)
-
-
-
-
 
         #---------------GUI Prepa END ------------------#
 
@@ -134,7 +120,6 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         if self.path:
             self.folderPath.setText(self.path)
             self.checkFolderStructure4D(self.path)
-
 
     # ---
     def checkFolderStructure4D(self, root):
@@ -152,43 +137,34 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
     # ---
     def functionGenerateO(self) :
         print("Generate 4DOverview of the project folder - Overview Only")
-
         if self.path == None :
             self.selectFolder()
-        
         CentralWindowOverview.fForAllFcstdO(self.path)
         CentralWindowOverview.makeView(self.path)
-
 
     # ---
     def functionGenerateOT(self) :
         print("Generate 4DOverview of the project folder and Versionning")
-
         if self.path == None :
             self.selectFolder()
-        
         CentralWindowOverview.fForAllFcstd(self.path)
         CentralWindowOverview.makeView(self.path)
 
     # ---
     def functionView(self) :
         print("View 4DOverview of the project folder")
-
         if self.path == None :
             self.selectFolder()
-        
         CentralWindowOverview.makeView(self.path)
 
         # ---
     def functionProjectBrowser(self) :
         print("Project Browser start in central view")
-        
         CentralWindowProjectBrowser.show_project_browser()
 
          # ---
     def functionAssetCreator(self) :
         print("starting the Asset Creator Widget")
-        
         AssetCreatorWidget.launch_asset_creator()
 
     # ---
@@ -223,18 +199,17 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
             print("no active file")
 
         CentralWindowTimeLine.save_incremented_version(doc)
-        
 
-def start () :
-    # create the  dock
+
+def start():
+    # Create the dock.
     main_win = FreeCADGui.getMainWindow()
 
     #check if already activated
     dock_name = "FourOverviewMainPanel"
     existing_dock = main_win.findChild(QtWidgets.QDockWidget, dock_name)
 
-    if existing_dock is None: 
-
+    if existing_dock is None:
         dock_widget = QtWidgets.QDockWidget("4D Tools", main_win)
         dock_widget.setWidget(FourOverviewMainPanel())
         dock_widget.setObjectName("FourOverviewMainPanel")
@@ -242,12 +217,7 @@ def start () :
         # use of needed QtCore flags
         main_win.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock_widget)
         dock_widget.show()
-
     else :
-
         print(f"The pannel '{dock_name}' is already open, bring it front")
         existing_dock.show()
         existing_dock.raise_()
-
-
-

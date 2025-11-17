@@ -17,7 +17,7 @@
 #   along with this library. If not, see <https://www.gnu.org/licenses/>.
 #
 #   For custom extensions or commercial adaptations, please   ---  :
-#     ---  
+#     ---
 # ***************************************************************************
 from pathlib import Path
 
@@ -138,7 +138,6 @@ class ProjectBrowser(QtWidgets.QWidget):
 
     # -------------------------------------------------------------------------
     def on_project_clicked(self, project_path: str):
-
         self.info_label.setText(f"Project selected {Path(project_path).name}")
         # we open the Overview - View of the selected project
         CentralWindowOverview.makeView(project_path)

@@ -61,9 +61,9 @@ class CentralView(QtWidgets.QWidget):
         self.load_thumbnails()
 
     def load_thumbnails(self) -> None:
-        """image loading from folder """
         #THUMB_DIR = os.path.expanduser("~/4DOverview")  # path to 4DOverview folder
         THUMB_DIR =  Path(self.projectfolderpath) / "4DOverview"
+        """Load images from folder DOverview."""
 
         for i in reversed(range(self.grid.count())):
             w = self.grid.itemAt(i).widget()
@@ -78,7 +78,7 @@ class CentralView(QtWidgets.QWidget):
         images = [f for f in os.listdir(THUMB_DIR)
                   if f.lower().endswith(('.png', '.jpg', '.jpeg', '.svg'))]
 
-        # alphabetical and numerical order
+        # Alphabetical and numerical order.
         images.sort()
 
         if not images:
@@ -321,13 +321,13 @@ def increment_version(last_version):
 
 class ThumbnailWidget(QtWidgets.QFrame):
     """Widget to get a clickable Miniature Thumbnail"""
-    clicked = QtCore.Signal(str)  # signal vers  le chemin de l'image..
+    # Signal that emits the image path when clicked.
+    clicked = QtCore.Signal(str)
 
     def __init__(self, img_path, size=200):
         super().__init__()
         self.img_path = img_path
         self.size = size
-
 
         self.setFixedSize(size, size)
         self.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -349,12 +349,12 @@ class ThumbnailWidget(QtWidgets.QFrame):
             }
         """)
 
-        # --- layout vertical ---
+        # Main vertical layout.
         layout = QtWidgets.QVBoxLayout(self)
         layout.setContentsMargins(6, 6, 6, 6)
         layout.setSpacing(4)
 
-        # --- image ---
+        # Image.
         pix = QtGui.QPixmap(img_path)
         if not pix.isNull():
             pix = pix.scaled(size - 20, size - 40, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation)
@@ -364,7 +364,7 @@ class ThumbnailWidget(QtWidgets.QFrame):
         self.label_img.setAlignment(QtCore.Qt.AlignCenter)
         layout.addWidget(self.label_img, stretch=1)
 
-        # --- file name without extension ---
+        # File name without extension.
         filename = os.path.splitext(os.path.basename(img_path))[0]
         self.label_name = QtWidgets.QLabel(filename)
         self.label_name.setAlignment(QtCore.Qt.AlignCenter)

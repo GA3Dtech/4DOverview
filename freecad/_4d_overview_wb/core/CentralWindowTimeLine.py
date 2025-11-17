@@ -269,7 +269,7 @@ def save_incremented_version(doc: FreeCAD.Document) -> None:
 
     # Extract thumbnail.
     try:
-        with zipfile.ZipFile(fcstd_path, 'r') as z:
+        with zipfile.ZipFile(fcstd_path, "r") as z:
             thumb_candidates = [f for f in z.namelist() if f.lower().endswith("thumbnail.png")]
             if thumb_candidates:
                 with z.open(thumb_candidates[0]) as thumb:

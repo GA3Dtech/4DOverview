@@ -38,6 +38,7 @@ from freecad. _4d_overview_wb.core import (
 class FourOverviewMainPanel(QtWidgets.QWidget):
     def __init__(self, parent=None) -> None:
         super().__init__(parent)
+
         self.setWindowTitle("4D Overview - Main")
         layout = QtWidgets.QVBoxLayout(self)
 
@@ -116,9 +117,9 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
             self.check_folder_structure_4d(self.path)
 
     def check_folder_structure_4d(self, root) -> None:
-        """Create the 4DOverview files Structures.
+        """Create the 4DOverview file structure.
 
-        Create the 4DOverview files Structures.: ./4DOverview/.FileName.
+        Create the 4DOverview file structure: ./4DOverview/.FileName.
         """
         overview = os.path.join(root, "4DOverview")
         if not os.path.exists(overview):
@@ -132,21 +133,21 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
 
     def generate_overview(self) -> None:
         FreeCAD.Console.PrintMessage("Generate 4DOverview of the project folder - Overview Only")
-        if self.path == None :
+        if self.path is None:
             self.select_folder()
         CentralWindowOverview.fForAllFcstdO(self.path)
         CentralWindowOverview.make_view(self.path)
 
     def generate_overview_timeline(self) -> None:
         FreeCAD.Console.PrintMessage("Generate 4DOverview of the project folder and Versionning")
-        if self.path == None :
+        if self.path is None:
             self.select_folder()
         CentralWindowOverview.fForAllFcstd(self.path)
         CentralWindowOverview.make_view(self.path)
 
     def view_project(self) -> None:
         FreeCAD.Console.PrintMessage("View 4DOverview of the project folder")
-        if self.path == None :
+        if self.path is None:
             self.select_folder()
         CentralWindowOverview.make_view(self.path)
 

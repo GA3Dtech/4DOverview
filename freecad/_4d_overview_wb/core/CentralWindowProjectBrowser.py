@@ -140,7 +140,6 @@ class ProjectBrowser(QtWidgets.QWidget):
 
         self.info_label.setText(f"{len(project_dirs)} projects detected")
 
-    # -------------------------------------------------------------------------
     def make_project_thumbnail(self, project_dir: Path) -> ProjectThumbnail:
         """Grey (if empty) or mixed thumbnail generation."""
         overview = project_dir / "4DOverview"
@@ -171,15 +170,17 @@ class ProjectBrowser(QtWidgets.QWidget):
             4: [(0, 0, h, h), (h, 0, h, h), (0, h, h, h), (h, h, h, h)]
         }
         for thumb, pos in zip(thumbs, positions[n]):
-            img = QtGui.QPixmap(str(thumb)).scaled(pos[2], pos[3],
-                                                   QtCore.Qt.KeepAspectRatioByExpanding,
-                                                   QtCore.Qt.SmoothTransformation)
+            img = QtGui.QPixmap(str(thumb)).scaled(
+                    pos[2],
+                    pos[3],
+                    QtCore.Qt.KeepAspectRatioByExpanding,
+                    QtCore.Qt.SmoothTransformation,
+            )
             painter.drawPixmap(pos[0], pos[1], img)
         painter.end()
 
         return ProjectThumbnail(project_dir, composite)
 
-    # -------------------------------------------------------------------------
     def on_project_clicked(self, project_path: str):
         self.info_label.setText(f"Project selected {Path(project_path).name}")
         # we open the Overview - View of the selected project

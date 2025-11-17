@@ -46,7 +46,6 @@ class _4DOverviewWB(Gui.Workbench):
         code which should be computed when a user switch to this workbench
         '''
         StartDockWidget.start()
-        #CentralWindowGeneric.makeView()
 
     def Deactivated(self):
         '''

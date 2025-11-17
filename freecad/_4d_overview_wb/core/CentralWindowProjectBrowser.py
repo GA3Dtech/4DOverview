@@ -160,12 +160,15 @@ class ProjectBrowser(QtWidgets.QWidget):
         painter.setRenderHint(QtGui.QPainter.Antialiasing)
 
         n = len(thumbs)
+        s = size
+        h = size // 2
+        q = size // 4
+        # (x, y, width, height).
         positions = {
-            1: [(0, 0, size, size)],
-            2: [(0, 0, size//2, size), (size//2, 0, size//2, size)],
-            3: [(0, 0, size//2, size//2), (size//2, 0, size//2, size//2), (size//4, size//2, size//2, size//2)],
-            4: [(0, 0, size//2, size//2), (size//2, 0, size//2, size//2),
-                (0, size//2, size//2, size//2), (size//2, size//2, size//2, size//2)]
+            1: [(0, 0, s, s)],
+            2: [(0, 0, h, s), (h, 0, h, s)],
+            3: [(0, 0, h, h), (h, 0, h, h), (q, h, h, h)],
+            4: [(0, 0, h, h), (h, 0, h, h), (0, h, h, h), (h, h, h, h)]
         }
         for thumb, pos in zip(thumbs, positions[n]):
             img = QtGui.QPixmap(str(thumb)).scaled(pos[2], pos[3],

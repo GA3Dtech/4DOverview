@@ -159,7 +159,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         AssetCreatorWidget.launch_asset_creator()
 
     def view_time_line(self) -> None:
-        doc = FreeCAD.ActiveDocument
+        doc = FreeCAD.activeDocument()
         if not doc or not doc.FileName:
             FreeCAD.Console.PrintMessage("No active file to show the timeline for")
             return
@@ -173,7 +173,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         CentralWindowTimeLine.make_view(target_path)
 
     def save_new_version(self) -> None:
-        doc = FreeCAD.ActiveDocument
+        doc = FreeCAD.activeDocument()
         CentralWindowTimeLine.save_incremented_version(doc)
 
 

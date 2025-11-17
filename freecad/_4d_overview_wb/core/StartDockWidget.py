@@ -107,7 +107,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         self.TimeLineIncButton.clicked.connect(self.save_new_version)
 
         # Test Text.
-        label = QtWidgets.QLabel("Bienvenue dans 4D Overview")
+        label = QtWidgets.QLabel("Welcome to 4D Overview")
         layout.addWidget(label)
 
     def select_folder(self) -> None:

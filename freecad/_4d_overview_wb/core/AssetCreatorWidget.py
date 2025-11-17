@@ -19,10 +19,11 @@
 #   For custom extensions or commercial adaptations, please   ---  :
 #     ---  
 # ***************************************************************************
+import os
+
 import FreeCAD
 import FreeCADGui
 from PySide import QtWidgets  # FreeCAD's PySide!
-import os
 
 
 class AssetCreator(QtWidgets.QDialog):

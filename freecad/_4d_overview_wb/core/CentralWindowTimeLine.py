@@ -19,13 +19,15 @@
 #   For custom extensions or commercial adaptations, please   ---  :
 #     ---  
 # ***************************************************************************
-import FreeCADGui
-import FreeCAD
-from PySide import QtWidgets, QtCore, QtGui  # Freecad's PySide!
 import os
-import string, zipfile
-from pathlib import Path
 import shutil
+import string
+import zipfile
+from pathlib import Path
+
+import FreeCAD
+import FreeCADGui
+from PySide import QtCore, QtGui, QtWidgets  # Freecad's PySide!
 
 
 class CentralView(QtWidgets.QWidget):
@@ -228,8 +230,6 @@ def save_incremented_version(doc):
     Usage:
         save_incremented_version(FreeCAD.ActiveDocument)
     """
-    import FreeCAD, FreeCADGui, zipfile, string, os
-    from pathlib import Path
 
     # --- Validate document
     if not doc or not doc.FileName:

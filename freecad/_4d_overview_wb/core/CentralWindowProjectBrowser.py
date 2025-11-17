@@ -19,10 +19,10 @@
 #   For custom extensions or commercial adaptations, please   ---  :
 #     ---  
 # ***************************************************************************
-import FreeCAD, FreeCADGui
-from PySide import QtWidgets, QtCore, QtGui  # Freecad's PySide!
 from pathlib import Path
-import os
+
+import FreeCADGui
+from PySide import QtCore, QtGui, QtWidgets  # Freecad's PySide!
 
 from freecad. _4d_overview_wb.core import CentralWindowOverview
 

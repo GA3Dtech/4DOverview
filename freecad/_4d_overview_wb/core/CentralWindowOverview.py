@@ -20,12 +20,14 @@
 #   For custom extensions or commercial adaptations, please   ---  :
 #     ---  
 # ***************************************************************************
-import FreeCADGui
-import FreeCAD
-from PySide import QtWidgets , QtCore, QtGui  # FreeCAD's PySide!
 import os
-import string, zipfile
+import string
+import zipfile
 from pathlib import Path
+
+import FreeCAD
+import FreeCADGui
+from PySide import QtCore, QtGui, QtWidgets  # FreeCAD's PySide!
 
 
 class CentralView(QtWidgets.QWidget):

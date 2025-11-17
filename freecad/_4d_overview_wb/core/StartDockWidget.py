@@ -20,19 +20,20 @@
 #     ---  
 # ***************************************************************************
 
-
-
-from PySide import QtWidgets, QtCore  # FreeCAD's PySide! Can be PySide2 or PySide6.
-import FreeCADGui
-import FreeCAD
 import os
 
+import FreeCAD
+import FreeCADGui
+from PySide import QtCore, QtWidgets  # FreeCAD's PySide! Can be PySide2 or PySide6.
 
-from freecad. _4d_overview_wb.core import CentralWindowGeneric
-from freecad. _4d_overview_wb.core import CentralWindowOverview
-from freecad. _4d_overview_wb.core import CentralWindowTimeLine
-from freecad. _4d_overview_wb.core import CentralWindowProjectBrowser
-from freecad. _4d_overview_wb.core import AssetCreatorWidget
+
+from freecad. _4d_overview_wb.core import (
+    AssetCreatorWidget,
+    CentralWindowOverview,
+    CentralWindowProjectBrowser,
+    CentralWindowTimeLine,
+)
+
 
 class FourOverviewMainPanel(QtWidgets.QWidget):
     def __init__(self, parent=None):

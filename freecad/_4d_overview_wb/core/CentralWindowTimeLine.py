@@ -345,7 +345,7 @@ class ThumbnailWidget(QtWidgets.QFrame):
             self.clicked.emit(self.img_path)
 
 
-def makeView(folderpath: str | Path) -> None:
+def make_view(folderpath: str | Path) -> None:
     # Create and insert central view into FreeCAD's MDI area
     mw = FreeCADGui.getMainWindow()
     mdi = mw.findChild(QtWidgets.QMdiArea)

@@ -14,7 +14,7 @@ class CentralView(QtWidgets.QWidget):
         button.clicked.connect(lambda: label.setText("Hello :)"))
 
 
-def makeView() :
+def make_view() :
     """Create and insert a central view."""
     mw = FreeCADGui.getMainWindow()
     mdi = mw.findChild(QtWidgets.QMdiArea)

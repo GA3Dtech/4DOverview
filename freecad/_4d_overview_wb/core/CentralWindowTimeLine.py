@@ -31,7 +31,7 @@ from PySide import QtCore, QtGui, QtWidgets  # Freecad's PySide!
 
 
 class CentralView(QtWidgets.QWidget):
-    def __init__(self, projectfolderpath):
+    def __init__(self, projectfolderpath: str | Path) -> None:
         projectname = str(Path(projectfolderpath).name)
 
         super().__init__()
@@ -58,7 +58,7 @@ class CentralView(QtWidgets.QWidget):
         # Load thumbnails on initialization.
         self.load_thumbnails()
 
-    def load_thumbnails(self):
+    def load_thumbnails(self) -> None:
         """Load and display thumbnails sorted by version suffix (_aa, _ab, etc.)"""
         THUMB_DIR = Path(self.projectfolderpath)
 
@@ -110,9 +110,9 @@ class CentralView(QtWidgets.QWidget):
             r, c = divmod(idx, cols)
             self.grid.addWidget(thumb, r, c)
 
-    def on_thumbnail_clicked(self, path):
+    def on_thumbnail_clicked(self, path: str) -> None:
         # When clicking a thumbnail, show a dialog with two options
-        self.info_label.setText(f" thumbnail clicked {os.path.basename(path)}")
+        self.info_label.setText(f'Thumbnail clicked "{os.path.basename(path)}"')
 
         path = Path(path)
         clicked_fcstd = path.parent / (path.stem + ".FCStd")
@@ -170,7 +170,7 @@ class CentralView(QtWidgets.QWidget):
             FreeCAD.open(str(clicked_fcstd))
             dlg.accept()
 
-        def overwrite_file():
+        def overwrite_file() -> None:
             reply = QtWidgets.QMessageBox.question(
                 dlg, "Confirmation",
                 f"Do you really want to overwrite:\n{real_fcstd}\nwith\n{clicked_fcstd}?",
@@ -205,7 +205,7 @@ class CentralView(QtWidgets.QWidget):
         dlg.exec()
 
 
-def increment_version(last_version):
+def increment_version(last_version: str) -> str:
     """Incremental version naming with two lowercase letters: 'aa', 'ab', ..."""
     if not last_version or len(last_version) != 2:
         return "aa"
@@ -220,7 +220,7 @@ def increment_version(last_version):
             return 'aa'  # fallback if 'zz' is reached
 
 
-def save_incremented_version(doc):
+def save_incremented_version(doc: FreeCAD.Document) -> None:
     """
     Save an incremented version of a FreeCAD document.
 
@@ -296,7 +296,7 @@ class ThumbnailWidget(QtWidgets.QFrame):
     """Widget that displays a clickable thumbnail."""
     clicked = QtCore.Signal(str)
 
-    def __init__(self, img_path, size=200):
+    def __init__(self, img_path, size=200) -> None:
         super().__init__()
         self.img_path = img_path
         self.size = size
@@ -343,12 +343,12 @@ class ThumbnailWidget(QtWidgets.QFrame):
         self.label_name.setWordWrap(True)
         layout.addWidget(self.label_name, stretch=0)
 
-    def mousePressEvent(self, event):
+    def mousePressEvent(self, event) -> None:
         if event.button() == QtCore.Qt.LeftButton:
             self.clicked.emit(self.img_path)
 
 
-def makeView(folderpath):
+def makeView(folderpath: str | Path) -> None:
     # Create and insert central view into FreeCAD's MDI area
     mw = FreeCADGui.getMainWindow()
     mdi = mw.findChild(QtWidgets.QMdiArea)

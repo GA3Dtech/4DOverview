@@ -36,7 +36,7 @@ from freecad. _4d_overview_wb.core import (
 
 
 class FourOverviewMainPanel(QtWidgets.QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None) -> None:
         super().__init__(parent)
         self.setWindowTitle("4D Overview - Main")
         layout = QtWidgets.QVBoxLayout(self)
@@ -188,7 +188,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         CentralWindowTimeLine.save_incremented_version(doc)
 
 
-def start():
+def start() -> None:
     # Create the dock.
     main_win = FreeCADGui.getMainWindow()
 

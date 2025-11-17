@@ -60,7 +60,7 @@ class CentralView(QtWidgets.QWidget):
         # Initial thumbnail loading.
         self.load_thumbnails()
 
-    def load_thumbnails(self):
+    def load_thumbnails(self) -> None:
         """image loading from folder """
         #THUMB_DIR = os.path.expanduser("~/4DOverview")  # path to 4DOverview folder
         THUMB_DIR =  Path(self.projectfolderpath) / "4DOverview"
@@ -145,7 +145,7 @@ def fForAllFcstdO(folder_path) :
             print(f"{filename} done & closed \n")
 
 
-def mycodeO(doc):
+def mycodeO(doc: FreeCAD.Document) -> None:
     # Function to execute for each .fcstd file.
     print(f"Document {doc.Name}\n")
 
@@ -190,7 +190,7 @@ def mycodeO(doc):
 
 
 
-def mycode (doc):
+def mycode(doc: FreeCAD.Document | None) -> None:
     """
     Save a versioned backup and extract the thumbnail for a FreeCAD document.
 

@@ -1,7 +1,7 @@
 # 4DOverviewWB
 
 4DOverview: A K.I.S.S. FreeCAD Workbench for easy **VISUAL** file management within FreeCAD, including overview, Time Travel, Assets, Bill of Process, Bill of Materials, and more. 
-All features are not ready yet, this workbench is in developpement.  
+All features are not ready yet, this workbench is in development.  
 The goal of this workbench is to gather, in a simple and practical way, various small macros I’ve developed over time to streamline the management of my FreeCAD projects.
 
 ## Functionalities
@@ -33,34 +33,40 @@ The goal of this workbench is to gather, in a simple and practical way, various 
 
  **General Presentation**  
    
-[4DOverview : Un Workbench FreeCAD qui organise TOUT , The Ultimate Visual Manager](https://youtu.be/kXRMw0q2pHw)
+[4DOverview : Un Workbench FreeCAD qui organise TOUT, The Ultimate Visual Manager](https://youtu.be/kXRMw0q2pHw)
 
-   
-please  just enable auto-dubbing for the English translation.
- --- 
+**Important note: please just enable auto-dubbing for the English translation when watching video**
+
+---
+
 ## Quick Start
 ### Manual installation
-#### 1. Find where are located your FreeCAD's workbenches
-The install path for FreeCAD modules depends on the operating system used.
+
+<details><summary>Expand to view manual installation options</summary>
+
+#### 1. Locate where FreeCAD stores workbenches on your system
+The install path for FreeCAD modules depends on the operating system used.  
 To find where is the user's application data directory enter next command on FreeCAD's Python console.
-App.getUserAppDataDir()
+`App.getUserAppDataDir()`
 
-Examples on different OS
+##### Examples on different OS
 
-Linux: /home/user/.local/share/FreeCAD/Mod/  (/home/user/.local/share/FreeCAD/v1-1/Mod (for instance if you use a developper version))
-
-macOS: /Users/user/Library/Preferences/FreeCAD/Mod/
-
-Windows: C:\Users\user\AppData\Roaming\FreeCAD\Mod\
+* **Linux**: `/home/user/.local/share/FreeCAD/Mod/`  (`/home/user/.local/share/FreeCAD/v1-1/Mod` (for instance if you use the development version))
+* **macOS**: `/Users/user/Library/Preferences/FreeCAD/Mod/`
+* **Windows**: `C:\Users\user\AppData\Roaming\FreeCAD\Mod\`
 
 #### 2. Download 4DOverview
-git clone https://github.com/GA3Dtech/4DOverview.git    (in the .../Mod/ folder of your  operating system)
+```
+cd <(Mod/ folder of your operating system)>
+git clone https://github.com/GA3Dtech/4DOverview.git
+```
+or browse https://github.com/GA3Dtech/4DOverviewand
+click on code button to download the ZIP archive of the depository, unzip it, rename the Folder "4DOverview-main" into "4DOverview", and paste the "4DOverview" folder into the .../Mod/ folder
 
-or go on https://github.com/GA3Dtech/4DOverview,  and click on code button to download the ZIP archive of the depository, unzip it,  rename the Folder "4DOverview-main" into "4DOverview" ,and paste the "4DOverview" folder in the .../Mod/ folder of your  operating system.
+Restarting FreeCAD is necessary to then load the workbench, you should find it the Workbench list (menu - View - Workbench)
 
-restarting FreeCAD is necessary to then load the workbench, you should find it the wb list (menu - View - Workbench)
+</details>
 
-  --- 
 ## How it works
 
 It is done for an organisation of files like this
@@ -119,9 +125,9 @@ RootFolder/
 .
 .
 
-
-  --- 
+  
 ## Maintainer
 
 GA3Dtech - Alain D. G.
-  ---  
+
+## License

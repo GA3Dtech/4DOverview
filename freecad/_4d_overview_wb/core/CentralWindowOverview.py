@@ -112,7 +112,7 @@ class CentralView(QtWidgets.QWidget):
             QtWidgets.QMessageBox.information(self, "Action thumbnail clicked", f"File not found: {fcstd}")
 
 
-# --- function to find all file .fcstd in the folder ---
+# --- function to find all .FCStd files in the folder ---
 def fForAllFcstd(folder_path) :
 
     for filename in os.listdir(folder_path):
@@ -126,7 +126,7 @@ def fForAllFcstd(folder_path) :
             # code for each file
             mycode(doc)
             
-            # Sauvegarder le document 
+            # Save the document
             # doc.save()
             
             # close file
@@ -146,7 +146,7 @@ def fForAllFcstdO(folder_path) :
             # code for each file
             mycodeO(doc)
             
-            # Sauvegarder le document 
+            # Save the document
             # doc.save()
             
             # close file
@@ -193,7 +193,7 @@ def mycodeO (doc):
                     raise FileNotFoundError
                 
         except Exception:
-            # fallback : capture de la vue actuelle
+            # fallback: capture of the current view
             FreeCAD.Console.PrintMessage("No Miniature found , capture scene instead.\n")
             view = FreeCADGui.ActiveDocument.ActiveView
 
@@ -263,13 +263,13 @@ def mycode (doc):
                     raise FileNotFoundError
                 
         except Exception:
-            # fallback : capture de la vue actuelle
+            # fallback: capture of the current view
             FreeCAD.Console.PrintMessage("No Miniature found , capture scene instead.\n")
             view = FreeCADGui.ActiveDocument.ActiveView
         
         if False :
 
-            # Export GLTF (toute la scène visible)
+            # Export GLTF (the entire scene visible)
             try:
                 import ImportGui
                 visible_objs = []
@@ -278,16 +278,16 @@ def mycode (doc):
                         if hasattr(obj, "ViewObject") and getattr(obj.ViewObject, "Visibility", True):
                             visible_objs.append(obj)
                     except Exception:
-                        # sécurité : on inclut par défaut si pas d'attribut
+                        # security: it's included by default if no attribute
                         visible_objs.append(obj)
 
                 if visible_objs:
                     ImportGui.export(visible_objs, gltf_path)
                     FreeCAD.Console.PrintMessage("Export GLTF réussi.\n")
                 else:
-                    FreeCAD.Console.PrintMessage("Aucun objet visible à exporter.\n")
+                    FreeCAD.Console.PrintMessage("No visible objects to export.\n")
             except Exception as e:
-                FreeCAD.Console.PrintError(f"Erreur export GLTF: {e}\n")
+                FreeCAD.Console.PrintError(f"GLTF export error: {e}\n")
 
         FreeCAD.Console.PrintMessage(f"Version {new_version} saved in {project_dir}\n")
 

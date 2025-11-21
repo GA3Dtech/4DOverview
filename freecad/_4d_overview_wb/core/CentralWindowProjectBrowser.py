@@ -147,7 +147,7 @@ class ProjectBrowser(QtWidgets.QWidget):
 
 # ============================================================================
 class ProjectThumbnail(QtWidgets.QFrame):
-    """Miniature cliquable représentant un projet entier"""
+    """Clickable thumbnail representing an entire project"""
     clicked = QtCore.Signal(str)
 
     def __init__(self, project_dir: Path, pixmap: QtGui.QPixmap, size=200):

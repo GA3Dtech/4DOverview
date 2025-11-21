@@ -22,13 +22,11 @@
 
 
 
-from PySide6 import QtWidgets, QtCore
+from PySide import QtWidgets, QtCore  # FreeCAD's PySide! Can be PySide2 or PySide6.
 import FreeCADGui
 import FreeCAD
 import os
 
-from PySide6.QtGui import QIcon, QPixmap
-from PySide6.QtCore import QSize, Qt
 
 from freecad. _4d_overview_wb.core import CentralWindowGeneric
 from freecad. _4d_overview_wb.core import CentralWindowOverview

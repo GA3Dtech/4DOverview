@@ -21,7 +21,7 @@
 # ***************************************************************************
 import FreeCAD
 import FreeCADGui
-from PySide6 import QtWidgets, QtCore
+from PySide import QtWidgets  # FreeCAD's PySide!
 import os
 
 

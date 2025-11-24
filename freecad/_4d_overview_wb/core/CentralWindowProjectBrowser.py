@@ -56,11 +56,11 @@ class ProjectThumbnail(QtWidgets.QFrame):
         img_label = QtWidgets.QLabel()
         img_label.setPixmap(pixmap)
         img_label.setAlignment(QtCore.Qt.AlignCenter)
-        layout.addWidget(img_label, 1)
+        layout.addWidget(img_label, stretch=1)
 
         text_label = QtWidgets.QLabel(project_dir.name)
         text_label.setAlignment(QtCore.Qt.AlignCenter)
-        layout.addWidget(text_label, 0)
+        layout.addWidget(text_label, stretch=0)
 
     def mousePressEvent(self, event: QtGui.QMouseEvent) -> None:
         if event.button() == QtCore.Qt.LeftButton:

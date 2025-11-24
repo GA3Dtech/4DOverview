@@ -17,12 +17,13 @@
 #   along with this library. If not, see <https://www.gnu.org/licenses/>.
 #
 #   For custom extensions or commercial adaptations, please   ---  :
-#     ---  
+#     ---
 # ***************************************************************************
+import os
+
 import FreeCAD
 import FreeCADGui
 from PySide import QtWidgets  # FreeCAD's PySide!
-import os
 
 
 class AssetCreator(QtWidgets.QDialog):
@@ -100,8 +101,8 @@ class AssetCreator(QtWidgets.QDialog):
         # paste selection in new document
         app.ActiveDocument = new_doc
         gui.runCommand('Std_Paste', 0)
-        
-        # V,F 
+
+        # V,F
         gui.SendMsgToActiveView("ViewFit")
         gui.activeDocument().activeView().viewIsometric()
 

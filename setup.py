@@ -14,5 +14,5 @@ setup(name='freecad._4d_overview_wb',
       maintainer_email="  ---  ",
       url="https://github.com/GA3Dtech/4DOverview",
       description="(4DOverview: A K.I.S.S. FreeCAD Workbench for easy file management, including overview, Time Travel, Assets, Bill of Process, Bill of Materials, and more.)",
-      install_requires=[('numpy',)],
+      install_requires=[],
       include_package_data=True)

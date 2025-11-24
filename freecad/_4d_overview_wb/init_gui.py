@@ -1,11 +1,9 @@
 import os
 import FreeCADGui as Gui
 import FreeCAD as App
-from freecad. _4d_overview_wb import my_numpy_function  
 
 #core function of the wb loading
 from freecad. _4d_overview_wb.core import StartDockWidget
-#from freecad. _4d_overview_wb.core import CentralWindowGeneric
 
 translate=App.Qt.translate
 QT_TRANSLATE_NOOP=App.Qt.QT_TRANSLATE_NOOP
@@ -34,17 +32,7 @@ class _4DOverviewWB(Gui.Workbench):
         This function is called at the first activation of the workbench.
         here is the place to import all the commands
         """
-
-        
-
-        App.Console.PrintMessage(translate(
-            "Log",
-            "Switching to _4d_overview_wb") + "\n")
-        App.Console.PrintMessage(translate(
-            "Log",
-            "Run a numpy function:") + "sqrt(100) = {}\n".format(my_numpy_function.my_foo(100)))
-
-        # NOTE: Context for this commands must be "Workbench"
+        # NOTE: Context for this commands must be "Workbench".
         self.appendToolbar(QT_TRANSLATE_NOOP("Workbench", "Tools"), self.toolbox)
         self.appendMenu(QT_TRANSLATE_NOOP("Workbench", "Tools"), self.toolbox)
 
@@ -52,21 +40,12 @@ class _4DOverviewWB(Gui.Workbench):
         '''
         code which should be computed when a user switch to this workbench
         '''
-    
         StartDockWidget.start()
-        #CentralWindowGeneric.makeView()
-
-        App.Console.PrintMessage(translate(
-            "Log",
-            "Workbench _4d_overview_wb activated.") + "\n")
 
     def Deactivated(self):
         '''
         code which should be computed when this workbench is deactivated
         '''
-        App.Console.PrintMessage(translate(
-            "Log",
-            "Workbench _4d_overview_wb de-activated.") + "\n")
-
+        pass
 
 Gui.addWorkbench(_4DOverviewWB())

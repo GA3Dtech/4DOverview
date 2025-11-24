@@ -145,7 +145,7 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         CentralWindowOverview.make_view(self.path)
 
     # ---
-    def functionGenerateOT(self) :
+    def generate_overview_timeline(self) :
         print("Generate 4DOverview of the project folder and Versioning")
 
         if self.path == None :

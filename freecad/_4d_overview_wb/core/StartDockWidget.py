@@ -42,15 +42,17 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         self.setWindowTitle("4D Overview - Main")
         layout = QtWidgets.QVBoxLayout(self)
 
-        # Project Browser view button.
+        # --- Project Browser view button ---
+
         self.ProjectBrowserButton = QtWidgets.QPushButton("Projects Browser")
         self.ProjectBrowserButton.setMinimumHeight(40)
         layout.addWidget(self.ProjectBrowserButton)
         self.ProjectBrowserButton.clicked.connect(self.browse_project)
 
-        # Horizontal line.
+        # --- Horizontal line      ---
+        
         line = QtWidgets.QFrame()
-        line.setFrameShape(QtWidgets.QFrame.HLine)
+        line.setFrameShape(QtWidgets.QFrame.HLine)       # Horizontal line
         layout.addWidget(line)
 
         # Project folder selection.
@@ -65,7 +67,10 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         toplineQW .addWidget(self.browseBtn)
         layout.addLayout(toplineQW)
 
-         # Overview view button.
+        
+
+        # --- Overview view button ---
+
         self.OverviewViewButton = QtWidgets.QPushButton("Overview - View")
         self.OverviewViewButton.setMinimumHeight(40)
         layout.addWidget(self.OverviewViewButton)
@@ -83,9 +88,10 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         layout.addWidget(self.OverviewGeneratorButtonOT)
         self.OverviewGeneratorButtonOT.clicked.connect(self.generate_overview_timeline)
 
-        # Horizontal line.
+        # --- Horizontal line      ---
+        
         line = QtWidgets.QFrame()
-        line.setFrameShape(QtWidgets.QFrame.HLine)
+        line.setFrameShape(QtWidgets.QFrame.HLine)       # Horizontal line
         layout.addWidget(line)
 
         # Asset creator widget button.
@@ -138,10 +144,13 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         CentralWindowOverview.fForAllFcstdO(self.path)
         CentralWindowOverview.make_view(self.path)
 
-    def generate_overview_timeline(self) -> None:
-        FreeCAD.Console.PrintMessage("Generate 4DOverview of the project folder and Versionning")
-        if self.path is None:
-            self.select_folder()
+    # ---
+    def functionGenerateOT(self) :
+        print("Generate 4DOverview of the project folder and Versioning")
+
+        if self.path == None :
+            self.selectFolder()
+        
         CentralWindowOverview.fForAllFcstd(self.path)
         CentralWindowOverview.make_view(self.path)
 
@@ -176,12 +185,11 @@ class FourOverviewMainPanel(QtWidgets.QWidget):
         doc = FreeCAD.activeDocument()
         CentralWindowTimeLine.save_incremented_version(doc)
 
-
-def start() -> None:
-    # Create the dock.
+def start () :
+    # create the dock
     main_win = FreeCADGui.getMainWindow()
 
-    #check if already activated
+    # check if already activated
     dock_name = "FourOverviewMainPanel"
     existing_dock = main_win.findChild(QtWidgets.QDockWidget, dock_name)
 
@@ -194,5 +202,7 @@ def start() -> None:
         main_win.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock_widget)
         dock_widget.show()
     else :
+
+        print(f"The panel '{dock_name}' is already open, bring it front")
         existing_dock.show()
         existing_dock.raise_()

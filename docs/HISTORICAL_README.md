@@ -15,7 +15,7 @@ pip install freecad.workbench_starterkit
 pip uninstall freecad.workbench_starterkit 
 ```
 
-**Note:** There are currently two FreeCAD workbench styles. The origin workbench type is called "legacy-workbench". In addition the "namespace-workbench" is now an optional (and preffered) way to extend the FreeCAD. (See [Glossary terms used in this discussion](#glossary-terms-used-in-this-discussion-that-may-lead-to-confusion)). For more discussion about the motivation behind the "namespace-workbench" see [Motivation for namespace-workbenches](#motivation-for-namespace-workbenches).
+**Note:** There are currently two FreeCAD workbench styles. The origin workbench type is called "legacy-workbench". In addition the "namespace-workbench" is now an optional (and preferred) way to extend the FreeCAD. (See [Glossary terms used in this discussion](#glossary-terms-used-in-this-discussion-that-may-lead-to-confusion)). For more discussion about the motivation behind the "namespace-workbench" see [Motivation for namespace-workbenches](#motivation-for-namespace-workbenches).
 
 ### Changing variables and strings
 
@@ -185,7 +185,7 @@ There are several reasons why you might consider using the namespace-workbenche 
 3. Integrating with [PyPI](https://pypi.org/) / [pip](https://pip.pypa.io/en/stable/). The ability to `pip install freecad.myworkbench` (See [related forum discussion](https://forum.freecadweb.org/viewtopic.php?f=10&t=38476&p=326444#p326574)).
 
 4. InitGui.py and Init.py (legacy-workbenches) do not behave like expected because these files are called with exec and are not properly imported. This leads to problems like:
-   - `__file__` not useable to get the path to the python file
+   - `__file__` not usable to get the path to the python file
    - predefined variables
 
 ### Tip

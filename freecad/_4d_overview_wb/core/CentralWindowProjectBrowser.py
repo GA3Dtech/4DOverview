@@ -184,7 +184,48 @@ class ProjectBrowser(QtWidgets.QWidget):
     def on_project_clicked(self, project_path: str):
         self.info_label.setText(f"Project selected {Path(project_path).name}")
         # we open the Overview - View of the selected project
-        CentralWindowOverview.make_view(project_path)
+        CentralWindowOverview.makeView(project_path)
+
+
+
+# ============================================================================
+class ProjectThumbnail(QtWidgets.QFrame):
+    """Clickable thumbnail representing an entire project"""
+    clicked = QtCore.Signal(str)
+
+    def __init__(self, project_dir: Path, pixmap: QtGui.QPixmap, size=200):
+        super().__init__()
+        self.project_dir = project_dir
+        self.setFixedSize(size, size + 30)
+        self.setCursor(QtCore.Qt.PointingHandCursor)
+        self.setStyleSheet("""
+            QFrame {
+                border-radius: 8px;
+                background-color: #fafafa;
+            }
+            QFrame:hover {
+                border: 2px solid #0078d7;
+                background-color: #eef6ff;
+            }
+            QLabel {
+                font-size: 11px;
+            }
+        """)
+        layout = QtWidgets.QVBoxLayout(self)
+        layout.setContentsMargins(4, 4, 4, 4)
+
+        img_label = QtWidgets.QLabel()
+        img_label.setPixmap(pixmap)
+        img_label.setAlignment(QtCore.Qt.AlignCenter)
+        layout.addWidget(img_label, 1)
+
+        text_label = QtWidgets.QLabel(project_dir.name)
+        text_label.setAlignment(QtCore.Qt.AlignCenter)
+        layout.addWidget(text_label, 0)
+
+    def mousePressEvent(self, event):
+        if event.button() == QtCore.Qt.LeftButton:
+            self.clicked.emit(str(self.project_dir))
 
 
 # ============================================================================

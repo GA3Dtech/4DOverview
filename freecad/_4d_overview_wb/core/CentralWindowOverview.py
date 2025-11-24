@@ -107,8 +107,9 @@ class CentralView(QtWidgets.QWidget):
             QtWidgets.QMessageBox.information(self, "Action thumbnail clicked", f"File not found: {fcstd}")
 
 
-def fForAllFcstd(folder_path):
-    """Find all .fcstd files in the folder and run `mycode` on them."""
+# --- function to find all .FCStd files in the folder ---
+def fForAllFcstd(folder_path) :
+
     for filename in os.listdir(folder_path):
         if filename.lower().endswith(".fcstd"):
             file_path = os.path.join(folder_path, filename)
@@ -118,8 +119,8 @@ def fForAllFcstd(folder_path):
 
             # code for each file
             mycode(doc)
-
-            # Sauvegarder le document
+            
+            # Save the document
             # doc.save()
 
             # close file
@@ -138,7 +139,10 @@ def fForAllFcstdO(folder_path) :
 
             # code for each file
             mycodeO(doc)
-
+            
+            # Save the document
+            # doc.save()
+            
             # close file
             FreeCAD.closeDocument(doc.Name)
             FreeCAD.Console.PrintMessage(f'"{filename}" done & closed\n')
@@ -149,71 +153,49 @@ def mycodeO(doc: FreeCAD.Document) -> None:
 
     if not doc or not doc.FileName:
         FreeCAD.Console.PrintError("No document found\n")
-        return
+    else:
+        filepath = doc.FileName
+        dirname = os.path.dirname(filepath)
+        basename = os.path.splitext(os.path.basename(filepath))[0]
 
-    filepath = doc.FileName
-    dirname = os.path.dirname(filepath)
-    basename = os.path.splitext(os.path.basename(filepath))[0]
+        # folder 4DOverview in the Project folder : Project/4DOverview/
+        overview_dir = os.path.join(dirname, "4DOverview")
+        if not os.path.exists(overview_dir):
+            os.mkdir(overview_dir)
 
-    # Folder 4DOverview in the Project folder: Project/4DOverview/
-    overview_dir = os.path.join(dirname, "4DOverview")
-    if not os.path.exists(overview_dir):
-        os.mkdir(overview_dir)
+        # Save the file
+        #doc.save() # not necessary if you want to update the thumbnail with actual settings you must do it
+        # faster and lighter without especially on cloud parallelized storage
 
-    # Save the file
-    #doc.save() # not necessary if you want to update the thumbnail with actual settings you must do it
-    # faster and lighter without especially on cloud parallelized storage
+        # path for "inwork" FreeCAD files
+        png_path_inwork = os.path.join(overview_dir, f"{basename}.png")
 
-    # path for "inwork" FreeCAD files.
-    png_path_inwork = os.path.join(overview_dir, f"{basename}.png")
+            # Extraction of thumbnail from .FCStd
+        try:
+            with zipfile.ZipFile(filepath , 'r') as z:
+                thumb_candidates = [f for f in z.namelist() if f.lower().endswith("thumbnail.png")]
+                if thumb_candidates:
+                    with z.open(thumb_candidates[0]) as thumb:
+                        data = thumb.read()  # read once
+                    # write to both destinations !!
 
-    # Extraction of thumbnail from .FCStd.
-    try:
-        with zipfile.ZipFile(filepath , 'r') as z:
-            thumb_candidates = [f for f in z.namelist() if f.lower().endswith("thumbnail.png")]
-            if thumb_candidates:
-                with z.open(thumb_candidates[0]) as thumb:
-                    data = thumb.read()  # read once
-                # write to both destinations !!
-
-                with open(png_path_inwork, "w") as out:
-                    out.write(data)
-                FreeCAD.Console.PrintMessage("Thumbnail extracted.\n")
-            else:
-                raise FileNotFoundError
-
-    except Exception:
-        # Fallback: capture of the current view.
-        FreeCAD.Console.PrintMessage("No thumbnail found, capture scene instead.\n")
-        view = FreeCADGui.ActiveDocument.ActiveView
-        # TODO
+                    with open(png_path_inwork, "wb") as out:
+                        out.write(data)
+                    FreeCAD.Console.PrintMessage("Miniature extracted.\n")
+                else:
+                    raise FileNotFoundError
+                
+        except Exception:
+            # fallback: capture of the current view
+            FreeCAD.Console.PrintMessage("No Miniature found , capture scene instead.\n")
+            view = FreeCADGui.ActiveDocument.ActiveView
 
 
-def mycode(doc: FreeCAD.Document | None) -> None:
-    """
-    Save a versioned backup and extract the thumbnail for a FreeCAD document.
 
-    This function:
-      - Ensures a '4DOverview' folder and a hidden subfolder for the document exist in the project directory.
-      - Determines the next available two-letter version suffix (e.g., 'aa', 'ab', ...).
-      - Saves the current document and a versioned copy (.FCStd) in the subfolder.
-      - Extracts the thumbnail image from the .FCStd file and saves it both in the subfolder and the main '4DOverview' folder.
-      - (Optionally, if enabled) Exports a GLTF file of all visible objects in the document.
+def mycode (doc):
+    print(f"Document {doc.Name} \n")
 
-    Args:
-        doc (FreeCAD.Document | None): The FreeCAD document to process.
-
-    Side Effects:
-        - Creates directories and files on disk.
-        - Saves and copies FreeCAD documents.
-        - Writes PNG thumbnail images.
-        - Prints messages to the FreeCAD console.
-
-    Raises:
-        Prints error messages if the document is invalid or if thumbnail extraction fails.
-    """
-
-    if not doc or (not hasattr(doc, "FileName")) or not doc.FileName:
+    if not doc or not doc.FileName:
         FreeCAD.Console.PrintError("No document found\n")
         return
 
@@ -282,23 +264,46 @@ def mycode(doc: FreeCAD.Document | None) -> None:
     if False :
         # Export GLTF (toute la scène visible)
         try:
-            import ImportGui
-            visible_objs = []
-            for obj in doc.Objects:
-                try:
-                    if hasattr(obj, "ViewObject") and getattr(obj.ViewObject, "Visibility", True):
-                        visible_objs.append(obj)
-                except Exception:
-                    # sécurité : on inclut par défaut si pas d'attribut
-                    visible_objs.append(obj)
+            with zipfile.ZipFile(fcstd_path, 'r') as z:
+                thumb_candidates = [f for f in z.namelist() if f.lower().endswith("thumbnail.png")]
+                if thumb_candidates:
+                    with z.open(thumb_candidates[0]) as thumb:
+                        data = thumb.read()  # read once
+                    # write to both destinations !!
+                    with open(png_path, "wb") as out:
+                        out.write(data)
+                    with open(png_path_inwork, "wb") as out:
+                        out.write(data)
+                    FreeCAD.Console.PrintMessage("Miniature extracted.\n")
+                else:
+                    raise FileNotFoundError
+                
+        except Exception:
+            # fallback: capture of the current view
+            FreeCAD.Console.PrintMessage("No Miniature found , capture scene instead.\n")
+            view = FreeCADGui.ActiveDocument.ActiveView
+        
+        if False :
 
-            if visible_objs:
-                ImportGui.export(visible_objs, gltf_path)
-                FreeCAD.Console.PrintMessage("Export GLTF réussi.\n")
-            else:
-                FreeCAD.Console.PrintMessage("Aucun objet visible à exporter.\n")
-        except Exception as e:
-            FreeCAD.Console.PrintError(f"Erreur export GLTF: {e}\n")
+            # Export GLTF (the entire scene visible)
+            try:
+                import ImportGui
+                visible_objs = []
+                for obj in doc.Objects:
+                    try:
+                        if hasattr(obj, "ViewObject") and getattr(obj.ViewObject, "Visibility", True):
+                            visible_objs.append(obj)
+                    except Exception:
+                        # security: it's included by default if no attribute
+                        visible_objs.append(obj)
+
+                if visible_objs:
+                    ImportGui.export(visible_objs, gltf_path)
+                    FreeCAD.Console.PrintMessage("Export GLTF réussi.\n")
+                else:
+                    FreeCAD.Console.PrintMessage("No visible objects to export.\n")
+            except Exception as e:
+                FreeCAD.Console.PrintError(f"GLTF export error: {e}\n")
 
         FreeCAD.Console.PrintMessage(f"Version {new_version} saved in {project_dir}\n")
 

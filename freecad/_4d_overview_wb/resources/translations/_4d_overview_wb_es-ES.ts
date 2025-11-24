@@ -2,19 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="es_ES" sourcelanguage="en">
 <context>
-    <name>Log</name>
-    <message>
-        <location filename="../../init_gui.py" line="30"/>
-        <source>Switching to _4d_overview_wb</source>
-        <translation>Cambiando a entorno de trabajo _4d_overview_wb</translation>
-    </message>
-    <message>
-        <location filename="../../init_gui.py" line="32"/>
-        <source>Run a numpy function:</source>
-        <translation>Ejecutar una función de numpy</translation>
-    </message>
-</context>
-<context>
     <name>Workbench</name>
     <message>
         <location filename="../../init_gui.py" line="36"/>

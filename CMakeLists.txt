@@ -1,7 +1,6 @@
 set(Namespace_SRCS
         freecad/_4d_overview_wb/init_gui.py
         freecad/_4d_overview_wb/__init__.py
-        freecad/_4d_overview_wb/my_numpy_function.py
         freecad/_4d_overview_wb/version.py
         freecad/_4d_overview_wb/resources/cool.svg
         freecad/_4d_overview_wb/resources/translations/_4d_overview_wb_es-ES.qm

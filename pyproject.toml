@@ -18,7 +18,7 @@ maintainers = [
     {name = "GA3Dtech - Alain D. G.", email = "  ---  "},
 ]
 requires-python = ">=3.8"
-dependencies = ["('numpy',)"]
+dependencies = []
 
 [project.urls]
 source = "https://github.com/GA3Dtech/4DOverview"

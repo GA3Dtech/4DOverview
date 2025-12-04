@@ -131,3 +131,16 @@ RootFolder/
 GA3Dtech - Alain D. G.
 
 ## License
+LGPL
+
+## Project Roadmap
+
+Next steps:
+
+- Rename the project (globally) to reach a broader audience and make its purpose clearer.
+- Generate thumbnails **only for the currently selected file**, to avoid performance issues caused by opening all files in a project.
+- Add persistent memory for the root project folder and the last opened project (similar to stored properties).
+- Implement a naming assistant to help with consistent file naming and project creation.  
+  This may include a project description field, metadata file, or even a small project journal (iterations, goals, next steps, achievements, etc.).
+- Provide built-in help explaining the purpose and usage of the Workbench, encouraging a lean and well-structured file organization.  
+  These will be suggestions and best-practice guidelines.

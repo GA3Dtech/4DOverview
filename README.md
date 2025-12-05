@@ -138,7 +138,7 @@ LGPL
 Next steps:
 
 - Rename the project (globally) to reach a broader audience and make its purpose clearer.
-- Generate thumbnails **only for the currently selected file**, to avoid performance issues caused by opening all files in a project.
+- Generate thumbnails **only for the currently selected file**, to avoid performance issues caused by opening all files in a project. The simplest would also just making the tumbnail when saving the files (synchronisating the generation function with the saving command).
 - Add persistent memory for the root project folder and the last opened project (similar to stored properties).
 - Implement a naming assistant to help with consistent file naming and project creation.  
   This may include a project description field, metadata file, or even a small project journal (iterations, goals, next steps, achievements, etc.).

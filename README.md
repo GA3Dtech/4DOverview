@@ -1,5 +1,12 @@
 # 4DOverviewWB
 
+> ⚠️ **This project is discontinued.**
+> 4DOverview has been replaced by [PiStock](https://github.com/pistock-org/PiStock),
+> a self-hosted PLM and inventory system that expands on the same idea with a web
+> interface, 3D viewer, and FreeCAD integration. This repository is kept for
+> reference only - all future work happens on PiStock.
+> 
+
 4DOverview: A K.I.S.S. FreeCAD Workbench for easy **VISUAL** file management within FreeCAD, including overview, Time Travel, Assets, Bill of Process, Bill of Materials, and more. 
 All features are not ready yet, this workbench is in development.  
 The goal of this workbench is to gather, in a simple and practical way, various small macros I’ve developed over time to streamline the management of my FreeCAD projects.
